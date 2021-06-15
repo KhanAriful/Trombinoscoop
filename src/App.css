@@ -32,6 +32,11 @@ h2 {
   color: var(--secondary-color);
 }
 
+.button-text:hover {
+  transform: translateY(-2px);
+  transition: all ease-in-out 0.2s;
+}
+
 .link {
   color: var(--link-color);
   font-style: normal;

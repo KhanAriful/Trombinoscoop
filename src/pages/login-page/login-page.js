@@ -3,6 +3,7 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 export function LoginPage() {
   return (
@@ -12,13 +13,13 @@ export function LoginPage() {
       </MetaTags>
       <Wrapper>
         <Overlay className="flex justify-center items-center">
-          <div className="bg-white w-96 flex items-center flex-col rounded-2xl py-8">
+          <div className="bg-white w-96 flex items-center flex-col rounded-2xl shadow-xl py-8">
             <Logo className="mb-2" src={LogoImg} alt="trombinoscoop" />
             <h2 className="mb-4">Connexion</h2>
             <Input className="w-4/5 px-4 mb-6" placeholder="Email" />
             <Input className="w-4/5 px-4 mb-8" placeholder="Mot de passe" />
             <button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button>
-            <a className="link" href="#">Je n’ai pas de compte, je m’inscris</a>
+            <Link to="/Inscription"><span className="link">Je n’ai pas de compte, je m’inscris</span></Link>
           </div>
         </Overlay>
       </Wrapper>
