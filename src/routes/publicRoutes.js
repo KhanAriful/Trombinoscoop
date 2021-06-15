@@ -1,9 +1,10 @@
 import React from 'react'
+import { LoginPage } from './../pages'
 
 export default function PublicRoutes() {
   return (
     <div>
-      <h1>Public Routes</h1>
+      <LoginPage />
     </div>
   )
 }
