@@ -35,6 +35,9 @@ h2 {
 .button-text:hover {
   transform: translateY(-2px);
   transition: all ease-in-out 0.2s;
+  color: #fff;
+  background-color: var(--primary-color);
+  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.3);
 }
 
 .link {
