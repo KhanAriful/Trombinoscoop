@@ -21,6 +21,27 @@ export function SignupPage() {
   const [cursus, setCursus] = useState("")
   const [annee, setAnnee] = useState("")
 
+  const [initialValues, setInitialValues] = useState({
+    status: '',
+    prenom: '',
+    nom: '',
+    email: '',
+    password: '',
+    birthday: '',
+    tel: '',
+    matricule: '',
+    faculte: '',
+    cursus: '',
+    annee: '',
+  })
+
+  const handleChange = e => {
+    setInitialValues(prevValues => ({
+      ...prevValues,
+      [e.target.name]: e.target.value, 
+    }))
+  }
+
   const listValues = [{
     status: status,
     prenom: prenom,
@@ -92,15 +113,15 @@ export function SignupPage() {
             <h2 className="mb-6">Inscription</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-8" placeholder="Nom" value={nom} onChange={(e) => setNom(e.target.value)}/>
-                <Input className="w-full px-4 mb-8" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                <Input className="w-full px-4 mb-8" placeholder="Date de naissance" value={birthday} onChange={(e) => setBirthday(e.target.value)}/>
-                <Input className="w-full px-4 mb-8" placeholder="Matricule" value={matricule} onChange={(e) => setMatricule(e.target.value)}/>
-                <Input className="w-full px-4 mb-10" placeholder="Téléphone mobile" value={tel} onChange={(e) => setTel(e.target.value)}/>
+                <Input className="w-full px-4 mb-8" placeholder="Nom" name="nom" value={initialValues.nom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-8" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-8" placeholder="Date de naissance" name="birthday" value={initialValues.birthday} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-8" placeholder="Matricule" name="matricule" value={initialValues.matricule} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-10" placeholder="Téléphone mobile" name="tel" value={initialValues.tel} onChange={handleChange}/>
               </div>
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-6" placeholder="Prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)}/>
-                <Input className="w-full px-4 mb-2" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <Input className="w-full px-4 mb-6" placeholder="Prenom" name="prenom" value={initialValues.prenom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange}/>
                 <FormControl className="w-full">
                   <InputLabel id="faculte" className="mx-4">Faculté</InputLabel>
                   <Select className="w-full px-4 mb-3" defaultValue="" onChange={(e) => {setFaculte(e.target.value)}}>
