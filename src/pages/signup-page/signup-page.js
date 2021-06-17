@@ -6,7 +6,7 @@ import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Dropdown from './Dropdown'
+import { Dropdown } from '../../components'
 
 export function SignupPage() {
 
