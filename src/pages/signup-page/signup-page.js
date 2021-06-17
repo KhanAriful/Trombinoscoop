@@ -4,22 +4,11 @@ import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
-import { Input, Select, InputLabel, FormControl, MenuItem } from '@material-ui/core'
+import { Input } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import Dropdown from './Dropdown'
 
 export function SignupPage() {
-
-  const [status, setStatus] = useState("")
-  const [prenom, setPrenom] = useState("")
-  const [nom, setNom] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [birthday, setBirthday] = useState("")
-  const [tel, setTel] = useState("")
-  const [matricule, setMatricule] = useState("")
-  const [faculte, setFaculte] = useState("")
-  const [cursus, setCursus] = useState("")
-  const [annee, setAnnee] = useState("")
 
   const [initialValues, setInitialValues] = useState({
     status: '',
@@ -43,46 +32,23 @@ export function SignupPage() {
   }
 
   const listValues = [{
-    status: status,
-    prenom: prenom,
-    nom: nom,
-    email: email,
-    password: password,
-    birthday: birthday,
-    telephone: tel,
-    matricule: matricule,
-    faculte: faculte,
-    cursus: cursus,
-    annee: annee
+    status: initialValues.status,
+    prenom: initialValues.prenom,
+    nom: initialValues.nom,
+    email: initialValues.email,
+    password: initialValues.password,
+    birthday: initialValues.birthday,
+    telephone: initialValues.tel,
+    matricule: initialValues.matricule,
+    faculte: initialValues.faculte,
+    cursus: initialValues.cursus,
+    annee: initialValues.annee
   }]
-
-  const listStatus = [
-    'Etudiant', 
-    'Formateur'
-  ]
-  const listFaculte = [
-    'Paris', 
-    'Lille',
-  ]
-  const listCursus = [
-    'FullStacks',
-    'Cybersecurité',
-    'DevOps',
-    'Reseaux',
-    'NewTech',
-  ]
-  const listAnnee = [
-    'Premiere',
-    'Deuxieme',
-    'Troisieme',
-    'Quatrieme',
-    'Cinquieme',
-  ]
 
   const redirect_Page = (path, time) => {
       let tID = setTimeout(function () {
           window.location.href = path;
-          window.clearTimeout(tID);        // clear time out.
+          window.clearTimeout(tID);
       }, time);
   }
 
@@ -122,38 +88,10 @@ export function SignupPage() {
               <div className="w-1/2 mx-14">
                 <Input className="w-full px-4 mb-6" placeholder="Prenom" name="prenom" value={initialValues.prenom} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange}/>
-                <FormControl className="w-full">
-                  <InputLabel id="faculte" className="mx-4">Faculté</InputLabel>
-                  <Select className="w-full px-4 mb-3" defaultValue="" onChange={(e) => {setFaculte(e.target.value)}}>
-                    {listFaculte.map((label, index) => (
-                      <MenuItem value={label} key={index}>{label}</MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <FormControl className="w-full">
-                  <InputLabel id="faculte" className="mx-4">Cursus</InputLabel>
-                  <Select className="w-full px-4 mb-3" defaultValue="" onChange={(e) => {setCursus(e.target.value)}}>
-                    {listCursus.map((label, index) => (
-                        <MenuItem value={label} key={index}>{label}</MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-                <FormControl className="w-full">
-                  <InputLabel id="faculte" className="mx-4">Année</InputLabel>
-                  <Select className="w-full px-4 mb-3" defaultValue=""  onChange={(e) => {setAnnee(e.target.value)}}>
-                    {listAnnee.map((label, index) => (
-                        <MenuItem value={label} key={index}>{label}</MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
-                <FormControl className="w-full">
-                  <InputLabel id="status" className="mx-4">Je suis:</InputLabel>
-                  <Select className="w-full px-4 mb-3" defaultValue="" onChange={(e) => {setStatus(e.target.value)}}>
-                    {listStatus.map((label, index) => (
-                        <MenuItem value={label} key={index}>{label}</MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
+                <Dropdown title='Faculté' name='faculte' oc={handleChange} listdp={1} />
+                <Dropdown title='Cursus' name='cursus' oc={handleChange} listdp={2} />
+                <Dropdown title='Année' name='annee' oc={handleChange} listdp={3} />
+                <Dropdown title='Je suis:' name='status' oc={handleChange} listdp={0} />
               </div>
             </div>
             <button 
