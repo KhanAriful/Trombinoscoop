@@ -87,7 +87,7 @@ export function SignupPage() {
               </div>
               <div className="w-1/2 mx-14">
                 <Input className="w-full px-4 mb-6" placeholder="Prenom" name="prenom" value={initialValues.prenom} onChange={handleChange}/>
-                <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" type="password" value={initialValues.password} onChange={handleChange}/>
                 <Dropdown title='Faculté' name='faculte' oc={handleChange} listdp={1} />
                 <Dropdown title='Cursus' name='cursus' oc={handleChange} listdp={2} />
                 <Dropdown title='Année' name='annee' oc={handleChange} listdp={3} />
