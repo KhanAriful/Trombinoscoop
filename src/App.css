@@ -50,3 +50,27 @@ h2 {
 
   text-decoration-line: underline;
 }
+
+.primary-button {
+  background-color: var(--primary-color);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  color: white;
+}
+
+.secondary-button {
+  background-color: var(--secondary-color);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  color: white;
+}
+
+.post-feed-bg {
+  background: #F8F8F8;
+}

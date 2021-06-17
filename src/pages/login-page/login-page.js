@@ -18,7 +18,7 @@ export function LoginPage() {
             <h2 className="mb-4">Connexion</h2>
             <Input className="w-4/5 px-4 mb-6" placeholder="Email" />
             <Input className="w-4/5 px-4 mb-8" placeholder="Mot de passe" />
-            <button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button>
+            <Link to="/Posts"><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button></Link>
             <Link to="/Inscription"><span className="link">Je n’ai pas de compte, je m’inscris</span></Link>
           </div>
         </Overlay>
