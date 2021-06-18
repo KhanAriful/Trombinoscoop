@@ -11,7 +11,7 @@ export function Avatar({initial}) {
         let joinLetter = first.join('')
         let final = joinLetter.toUpperCase()
         return final
-      }
+    }
     const color = randomColor()
     return (
         <>

@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import Logo from './../../assets/images/Vectoradd_user.png'
 import { Avatar } from '../index'
+/* import { Link } from 'react-router-dom' */
 
-export function CardUser({ avatarLetter, name, fonction }) {
+export function CardUser({ name, fonction }) {
     return (
         <Wrapper className="m-4 shadow-lg flex flex-row justify-between">
             <div className="flex flex-col justify-center ml-6 w-1/6">
-                <Avatar initial={avatarLetter}/>
+                <Avatar initial={name}/>
             </div>
             <div className="flex flex-col justify-center w-6/12">
                 <span className="card-name">{name}</span>
