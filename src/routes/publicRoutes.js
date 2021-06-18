@@ -1,6 +1,6 @@
 import React from 'react'
-import { LoginPage, SignupPage, PostFeed } from './../pages'
-import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import { LoginPage, SignupPage, PostFeed, EditProfile } from './../pages'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 export default function PublicRoutes() {
   return (
@@ -12,6 +12,7 @@ export default function PublicRoutes() {
         <Route path="/Connexion" component={LoginPage} />
         <Route path="/Inscription" component={SignupPage} />
         <Route path="/Posts" component={PostFeed} />
+        <Route path="/Modifier" component={EditProfile} />
       </Switch>
     </Router>
   )
