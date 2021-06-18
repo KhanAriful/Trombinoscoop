@@ -42,7 +42,7 @@ export function UserProfile() {
             <Wrapper>
                 <Navbar />
                 <Overlay className="flex justify-center items-center">
-                <div className="bg-white w-2/6 flex items-center flex-col rounded-2xl shadow-xl py-8">
+                <div className="bg-white w-2/6 flex items-center flex-col rounded-2xl shadow-xl py-8 mt-10">
                     <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
                     <h2 className="mb-6">Mon profile</h2>
                     <div className="flex items-start mb-8 justify-start flex-col w-4/6 text-justify">

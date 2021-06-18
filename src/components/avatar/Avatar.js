@@ -18,7 +18,7 @@ export function Avatar({initial, large}) {
     return (
         <>
             <div>
-                <span className="avatar" data-letters={getInitial(initial)} style={{background: color, width: large ? 66 : 49, height: large ? 66 : 49}}></span>
+                <span className="avatar avatar-text" style={{background: color, width: large ? 66 : 49, height: large ? 66 : 49, fontSize: large ? 26 : 20}}>{getInitial(initial)}</span>
             </div>
         </>
     )

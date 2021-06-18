@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export function Navbar() {
   return (
-    <header className="bg-white shadow-xl fixed w-full">
+    <header style={{zIndex: 999}} className="bg-white shadow-xl fixed w-full">
       <div className="container h-20 mx-auto flex justify-between items-center">
         <Link to="/Posts">
           <div className="flex flex-row items-center">
