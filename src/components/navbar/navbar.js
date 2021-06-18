@@ -14,8 +14,8 @@ export function Navbar() {
           </div>
         </Link>
         <div className="flex flex-row items-center">
-          <Link to="/Posts"><button className="primary-button rounded-xl px-12 py-2">Voir mon profil</button></Link>
-          <Link to="/Posts"><button className="secondary-button rounded-xl px-12 py-2 ml-3">Deconnexion</button></Link>
+          <Link to="/User"><button className="primary-button rounded-xl px-12 py-2">Voir mon profil</button></Link>
+          <Link to="/Connexion"><button className="secondary-button rounded-xl px-12 py-2 ml-3">Deconnexion</button></Link>
         </div>
       </div>
     </header>

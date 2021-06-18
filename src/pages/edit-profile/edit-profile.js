@@ -2,16 +2,16 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
-import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
 import { Dropdown } from '../../components'
+import { Avatar } from '../../components'
 
 export function EditProfile() {
 
   const [initialValues, setInitialValues] = useState({
     status: '',
-    prenom: '',
-    nom: '',
+    prenom: 'User',
+    nom: 'User',
     email: '',
     password: '',
     birthday: '',
@@ -66,7 +66,7 @@ export function EditProfile() {
       <Wrapper>
         <Overlay className="flex justify-center items-center">
           <div className="bg-white w-4/6 flex items-center flex-col rounded-2xl shadow-xl py-8">
-            <Logo className="mb-2" src={LogoImg} alt="trombinoscoop" />
+            <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
             <h2 className="mb-6">Modifier le profile</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
@@ -109,7 +109,4 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.07);
   backdrop-filter: blur(6px);
 `
-const Logo = styled.img`
-  width: 66px;
-  height: 66px;
-`
+
