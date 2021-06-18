@@ -12,19 +12,30 @@ export function Avatar({initial, type}) {
         let final = joinLetter.toUpperCase()
         return final
     }
-    const color = randomColor()
-
     const size = {
-        M: {width: 49, height: 49},
-        L: {width: 66, height: 66},
+        'M': {pixel: 49},
+        'L': {piexl: 66},
+    }
+    const handleSize = () => {
+        let value = 0
+        if (type === 'M') {
+            value = size.M.pixel
+            return value
+        } else if ( type === 'L') {
+            value = size.L.piexl
+            return value
+        }
+        return value
     }
 
-    console.log(size)
+    const color = randomColor()
+    
+    const taille = handleSize() + 'px'
 
     return (
         <>
             <div>
-                <span className="avatar" data-letters={getInitial(initial)} style={{background:color}}></span>
+                <span className="avatar" data-letters={getInitial(initial)} style={{background:color, height:taille, width:taille}}></span>
             </div>
         </>
     )
