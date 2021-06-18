@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export function CardUser({ name, fonction }) {
     return (
         <Link to="/">
-            <Wrapper className="friend-card my-4 shadow-lg hover:shadow-xl w-full flex flex-row justify-between">
+            <Wrapper className="friend-card my-4 shadow-lg hover:shadow-xl w-full flex flex-row justify-between rounded-xl">
                 <div className="flex flex-col justify-center ml-6 w-1/6">
                     <Avatar initial={name} />
                 </div>
@@ -30,5 +30,4 @@ const Wrapper = styled.main`
   background-attachment: fixed;
   overflow-y: scroll;
   background-color: #fff;
-  border-radius: 12px;
 `

@@ -74,7 +74,7 @@ h2 {
 .primary-button:hover, .secondary-button:hover{
   transform: translateY(-2px);
   transition: all ease-in-out 0.2s;
-  box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.3);
 }
 
 .post-feed-bg {
@@ -115,4 +115,47 @@ h2 {
   font-weight: normal;
   line-height: 21px;
   color: #827D7D;
+}
+
+.bonjour {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 39px;
+  /* identical to box height */
+
+
+  color: #474646;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+
+
+  color: #474646;
+}
+
+.custom-textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #474646;
+}
+
+.custom-textarea::placeholder {
+  font-weight: normal;
+}
+
+.post-button {
+  right: 20px;
+  top: 26px;
 }
