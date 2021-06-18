@@ -8,7 +8,7 @@ export function CardUser({ name, fonction }) {
         <Link to="/">
             <Wrapper className="friend-card my-4 shadow-lg hover:shadow-xl w-full flex flex-row justify-between">
                 <div className="flex flex-col justify-center ml-6 w-1/6">
-                    <Avatar initial={name} type='M'/>
+                    <Avatar initial={name} />
                 </div>
                 <div className="flex flex-col justify-center w-6/12">
                     <span className="card-name">{name}</span>

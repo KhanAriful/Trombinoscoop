@@ -7,10 +7,12 @@ export function Navbar() {
   return (
     <header className="bg-white shadow-xl fixed w-full">
       <div className="container h-20 mx-auto flex justify-between items-center">
-        <div className="flex flex-row items-center">
-          <img className="h-12 w-12" alt="trombinoscoop" src={Logo} />
-          <Title className="ml-3">Trombinoscoop</Title>
-        </div>
+        <Link to="/Posts">
+          <div className="flex flex-row items-center">
+            <img className="h-12 w-12" alt="trombinoscoop" src={Logo} />
+            <Title className="ml-3">Trombinoscoop</Title>
+          </div>
+        </Link>
         <div className="flex flex-row items-center">
           <Link to="/Posts"><button className="primary-button rounded-xl px-12 py-2">Voir mon profil</button></Link>
           <Link to="/Posts"><button className="secondary-button rounded-xl px-12 py-2 ml-3">Deconnexion</button></Link>
