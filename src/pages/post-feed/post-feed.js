@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
-import { TextareaAutosize } from '@material-ui/core';
 
 export function PostFeed() {
   
