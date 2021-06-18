@@ -4,6 +4,13 @@ import { Navbar } from './../../components'
 import { CardUser } from '../../components'
 
 export function PostFeed() {
+  const getInitial = (name) => {
+    const str = name
+    var first = str.match(/\b(\w)/g)
+    let joinLetter = first.join('')
+    let final = joinLetter.toUpperCase()
+    return final
+  }
   return (
     <>
       <Wrapper>
@@ -13,7 +20,7 @@ export function PostFeed() {
 
           </div>
           <div className="w-3/12 h-screen ml-4 mr-6">
-            <CardUser name="Loan CLERIS" fonction="Fullstacks" avatarLetter="LC"/>
+            <CardUser name="Loan CLERIS" fonction="Fullstacks" avatarLetter={getInitial("Loan CLERIS")}/>
             <CardUser name="Ariful Khan" fonction="Fullstacks" avatarLetter="AK"/>
             <CardUser name="Martin CURTET" fonction="Fullstacks" avatarLetter="MC"/>
           </div>
