@@ -50,3 +50,143 @@ h2 {
 
   text-decoration-line: underline;
 }
+
+.primary-button {
+  background-color: var(--primary-color);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  color: white;
+}
+
+.secondary-button {
+  background-color: var(--secondary-color);
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  color: white;
+}
+
+.primary-button:hover, .secondary-button:hover{
+  transform: translateY(-2px);
+  transition: all ease-in-out 0.2s;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.3);
+}
+
+.post-feed-bg {
+  background: #F8F8F8;
+}
+
+.avatar-text {
+  content:attr(data-letters);
+  display: flex;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  text-align: center;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.avatar{
+  display:flex;
+  border-radius:50%;
+  justify-content: center;
+}
+
+.card-name{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 800;
+  color: #474646;
+}
+
+.card-fonction{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 21px;
+  color: #827D7D;
+}
+
+.bonjour {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 39px;
+  /* identical to box height */
+
+
+  color: #474646;
+}
+
+.name {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+
+
+  color: #474646;
+}
+
+.custom-textarea {
+  border: none;
+  outline: none;
+  resize: none;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #474646;
+}
+
+.custom-textarea::placeholder {
+  font-weight: normal;
+}
+
+.post-button {
+  right: 20px;
+  top: 26px;
+}
+
+.post-name {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height */
+
+
+  color: #474646;
+}
+
+.post-contents {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  
+  color: #474646;
+}
+
+.post-date {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+  
+  
+  color: #474646;  
+}

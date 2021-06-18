@@ -1,19 +1,17 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
-import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import { Dropdown } from '../../components'
+import { Avatar } from '../../components'
 
-export function SignupPage() {
+export function EditProfile() {
 
   const [initialValues, setInitialValues] = useState({
     status: '',
-    prenom: '',
-    nom: '',
+    prenom: 'User',
+    nom: 'User',
     email: '',
     password: '',
     birthday: '',
@@ -45,13 +43,6 @@ export function SignupPage() {
     annee: initialValues.annee
   }]
 
-  const redirect_Page = (path, time) => {
-      let tID = setTimeout(function () {
-          window.location.href = path;
-          window.clearTimeout(tID);
-      }, time);
-  }
-
   const handleSubmit = async (state) => {
     console.log(state);
     /* const request = await fetch("/add_user", {
@@ -70,13 +61,13 @@ export function SignupPage() {
   return (
     <>
       <MetaTags>
-        <title>Inscription</title>
+        <title>Modifier le profile</title>
       </MetaTags>
       <Wrapper>
         <Overlay className="flex justify-center items-center">
           <div className="bg-white w-4/6 flex items-center flex-col rounded-2xl shadow-xl py-8">
-            <Logo className="mb-2" src={LogoImg} alt="trombinoscoop" />
-            <h2 className="mb-6">Inscription</h2>
+            <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
+            <h2 className="mb-6">Modifier le profile</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
                 <Input className="w-full px-4 mb-8" placeholder="Nom" name="nom" value={initialValues.nom} onChange={handleChange}/>
@@ -98,9 +89,8 @@ export function SignupPage() {
               className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
               onClick={() => handleSubmit(listValues)}
             >
-                Go
+                Sauvegarder
             </button>
-            <Link to="/Connexion"><span className="link">Je suis déjà inscrit, je me connecte</span></Link>
           </div>
         </Overlay>
       </Wrapper>
@@ -119,7 +109,4 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.07);
   backdrop-filter: blur(6px);
 `
-const Logo = styled.img`
-  width: 66px;
-  height: 66px;
-`
+

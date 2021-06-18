@@ -1,6 +1,6 @@
 import { Select, InputLabel, FormControl, MenuItem } from '@material-ui/core'
 
-const Dropdown = ({title, name, oc, listdp}) => {
+export function Dropdown({title, name, oc, listdp}){
     const listDropdown = [
         [ 'Etudiant', 'Formateur'], 
         [ 'Paris', 'Lille'], 
@@ -20,5 +20,3 @@ const Dropdown = ({title, name, oc, listdp}) => {
         </>
     )
 }
-
-export default Dropdown
