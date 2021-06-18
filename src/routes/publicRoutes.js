@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginPage, SignupPage, PostFeed, EditProfile } from './../pages'
+import { LoginPage, SignupPage, PostFeed, EditProfile, UserProfile } from './../pages'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 export default function PublicRoutes() {
@@ -13,6 +13,7 @@ export default function PublicRoutes() {
         <Route path="/Inscription" component={SignupPage} />
         <Route path="/Posts" component={PostFeed} />
         <Route path="/Modifier" component={EditProfile} />
+        <Route path="/User" component={UserProfile} />
       </Switch>
     </Router>
   )
