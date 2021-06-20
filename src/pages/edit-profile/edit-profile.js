@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import { Input } from '@material-ui/core'
-import { Dropdown } from '../../components'
-import { Avatar } from '../../components'
+import { Dropdown, Avatar } from '../../components'
 
 export function EditProfile() {
 
