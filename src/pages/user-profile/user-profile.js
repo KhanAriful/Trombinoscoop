@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import { Link } from 'react-router-dom'
-import { Navbar } from '../../components'
-import { Avatar } from '../../components'
+import { Navbar, Avatar } from '../../components'
 
 export function UserProfile() {
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import Logo from './../../assets/images/add-friend.svg'
-import { Avatar } from '../index'
+import AddIcon from './../../assets/images/add-friend.svg'
+import { Avatar } from './../avatar'
 import { Link } from 'react-router-dom'
 
 export function CardUser({ name, fonction }) {
@@ -16,7 +16,7 @@ export function CardUser({ name, fonction }) {
                 </div>
                 <div className="flex justify-center items-center w-1/6">
                     <button onClick={() => console.log('Bouton clicker')}>
-                        <img className="mr-2" src={Logo} alt="trombinoscoop" />
+                        <img className="mr-2" src={AddIcon} alt="trombinoscoop" />
                     </button>
                 </div>
             </Wrapper>
