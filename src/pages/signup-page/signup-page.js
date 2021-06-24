@@ -7,6 +7,7 @@ import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Dropdown } from '../../components'
+import { v4 as uuid } from 'uuid'
 
 export function SignupPage() {
 
@@ -31,19 +32,20 @@ export function SignupPage() {
     }))
   }
 
-  const listValues = [{
+  const listValues = {
+    user_id: uuid(),
     status: initialValues.status,
     prenom: initialValues.prenom,
     nom: initialValues.nom,
     email: initialValues.email,
     password: initialValues.password,
     birthday: initialValues.birthday,
-    telephone: initialValues.tel,
+    tel: initialValues.tel,
     matricule: initialValues.matricule,
     faculte: initialValues.faculte,
     cursus: initialValues.cursus,
     annee: initialValues.annee
-  }]
+  }
 
   const redirect_Page = (path, time) => {
       let tID = setTimeout(function () {
@@ -54,7 +56,7 @@ export function SignupPage() {
 
   const handleSubmit = async (state) => {
     console.log(state);
-    /* const request = await fetch("/add_user", {
+    const request = await fetch("/add_user", {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
@@ -62,8 +64,8 @@ export function SignupPage() {
       body: JSON.stringify(state)
     })
     if (request.ok){
-      return redirect_Page("/connect", 1000)
-    } */
+      return redirect_Page("/Connexion", 1000)
+    }
 
   }
 
