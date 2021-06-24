@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, jsonify
+from flask import *
 from flask_mongoengine import MongoEngine
 from api_constants import mongodb_password
 
@@ -68,12 +68,14 @@ def addUser():
 @app.route('/login', methods=['POST', 'GET'])
 def verifyUser():
     data = request.get_json()
-    user = User
-    if data['email'] == user.email:
-        if data['password'] == user.password:
-            return make_response("LOG IN", 200)
-    else:
-        return "ERROR"
+    username = User.objects(email=data['email']).first()
+    if username:
+        if username.password == data['password']:
+            return make_response(username.user_id, 200)
+        else:
+            return make_response("", 404)
+    return ''
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

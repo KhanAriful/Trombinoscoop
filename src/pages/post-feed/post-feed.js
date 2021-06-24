@@ -16,15 +16,6 @@ const PostData = [
 const Post = props => {
   const { name, content, date } = props
 
-  const [test, setTest] = useState()
-
-  useEffect(() => {
-    fetch('/hello').then(res => res.json()).then(data => {
-      setTest(data.hello)
-    })
-  }, [])
-
-  console.log('test', test)
   return (
     <div className="flex w-full bg-white rounded-xl shadow-lg my-6 py-6">
       <div className="w-1/6 flex flex-col justify-center items-center">
