@@ -65,6 +65,8 @@ export function SignupPage() {
     })
     if (request.ok){
       return redirect_Page("/Connexion", 1000)
+    } else if (request.statusText === 'NOT FOUND') {
+      alert('Cette adresse email est déjà utilisée')
     }
 
   }
