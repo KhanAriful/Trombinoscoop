@@ -94,8 +94,6 @@ def getUser(emailLocal):
 def updateUser(emailLocal):
     username = User.objects(email=emailLocal).first()
     data = request.get_json()
-    print('data', data)
-    print('username',username.to_json())
     if username is not None:
         fields = {
             'status': data['status'],

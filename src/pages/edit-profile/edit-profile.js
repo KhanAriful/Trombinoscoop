@@ -9,8 +9,8 @@ export function EditProfile() {
 
   const [initialValues, setInitialValues] = useState({
     status: '',
-    prenom: 'T',
-    nom: 'T',
+    prenom: 'Uploading...',
+    nom: 'Uploading...',
     email: '',
     password: '',
     birthday: '',
