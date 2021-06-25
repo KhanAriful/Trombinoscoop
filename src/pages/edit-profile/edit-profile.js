@@ -4,6 +4,7 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import { Input } from '@material-ui/core'
 import { Dropdown, Avatar } from '../../components'
+import { Link } from 'react-router-dom'
 
 export function EditProfile() {
 
@@ -70,6 +71,21 @@ export function EditProfile() {
 
   }
 
+  const handleDelete = async () => {
+    const emailLocal = localStorage.getItem('email')
+    const request = await fetch(`/delete_user/${emailLocal}`, {
+      method: "POST",
+      headers: {
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(initialValues)
+    })
+    if (request.ok){
+      localStorage.clear()
+      return redirect_Page("/Connexion", 1000)
+    }
+  }
+
   return (
     <>
       <MetaTags>
@@ -97,12 +113,21 @@ export function EditProfile() {
                 <Dropdown title='Je suis:' name='status' oc={handleChange} listdp={0} />
               </div>
             </div>
-            <button 
-              className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
-              onClick={handleSubmit}
-            >
-                Sauvegarder
-            </button>
+            <div className='flex'>
+              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8" > retour </button></Link>
+              <button 
+                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
+                onClick={handleDelete}
+              >
+                  Supprimer mon compte
+              </button>
+              <button 
+                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
+                onClick={handleSubmit}
+              >
+                  Sauvegarder
+              </button>
+            </div>
           </div>
         </Overlay>
       </Wrapper>

@@ -11,10 +11,7 @@ DB_URI = "mongodb+srv://Hikuro:{}@cluster0.q1kcl.mongodb.net/{}?retryWrites=true
     mongodb_password, database_name
 )
 app.config["MONGODB_HOST"] = DB_URI
-
 db.connect(host=DB_URI)
-
-
 class User(db.Document):
     user_id = db.StringField()
     status = db.StringField()
@@ -69,7 +66,6 @@ def addUser():
     else:
         return make_response("USER IN DB", 404)
 
-
 @app.route('/login', methods=['POST', 'GET'])
 def verifyUser():
     data = request.get_json()
@@ -113,9 +109,17 @@ def updateUser(emailLocal):
     else:
         print('404')
         return make_response("USER IN DB", 404)
+
+@app.route('/delete_user/<emailLocal>', methods=['POST'])
+def deleteUSer(emailLocal):
+    username = User.objects(email=emailLocal).first()
+    if username is not None:
+        username.delete()
+        return make_response('', 200)
+    else: 
+        return make_response('', 404)
+
     
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-    """  """
