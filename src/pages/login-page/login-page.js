@@ -4,8 +4,45 @@ import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 export function LoginPage() {
+
+  const [initialValues, setInitialValues] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleChange = e => {
+    setInitialValues(prevValues => ({
+      ...prevValues,
+      [e.target.name]: e.target.value, 
+    }))
+  }
+
+  const redirect_Page = (path, time) => {
+    let tID = setTimeout(function () {
+        window.location.href = path;
+        window.clearTimeout(tID);
+    }, time);
+  }
+
+  const handleSubmit = async () => {
+    const request = await fetch("/login", {
+      method: "POST",
+      headers: {
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(initialValues)
+    })
+    if (request.ok){
+      localStorage.setItem('isLoggedIn', true)
+      localStorage.setItem('email', initialValues.email)
+      redirect_Page('/Posts', 1000)
+    } else if (request.statusText === 'NOT FOUND') {
+      localStorage.setItem('isLoggedIn', false)
+    }
+  }
   return (
     <>
       <MetaTags>
@@ -16,9 +53,9 @@ export function LoginPage() {
           <div className="bg-white w-96 flex items-center flex-col rounded-2xl shadow-xl py-8">
             <Logo className="mb-2" src={LogoImg} alt="trombinoscoop" />
             <h2 className="mb-4">Connexion</h2>
-            <Input className="w-4/5 px-4 mb-6" placeholder="Email" />
-            <Input className="w-4/5 px-4 mb-8" placeholder="Mot de passe" />
-            <Link to="/Posts"><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button></Link>
+            <Input className="w-4/5 px-4 mb-6" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange} />
+            <Input className="w-4/5 px-4 mb-8" type='password' placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange} />
+            <button onClick={handleSubmit} className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button>
             <Link to="/Inscription"><span className="link">Je n’ai pas de compte, je m’inscris</span></Link>
           </div>
         </Overlay>
