@@ -77,9 +77,20 @@ def verifyUser():
     if username is not None:
         if username.password == data['password']:
             return make_response(username.user_id, 200)
+        else:
+            return make_response("Password is wrong", 404)
     elif username is None:
         return make_response("", 404)
 
+@app.route('/get_user/<emailLocal>', methods=['GET'])
+def getUser(emailLocal):
+    print(emailLocal)
+    username = User.objects(email=emailLocal).first()
+    if username is not None:
+        print(username.to_json())
+        return {'user': username.to_json()}
+    else:
+        return {'user': 'Utilisateur non trouve'}
     
 
 if __name__ == '__main__':

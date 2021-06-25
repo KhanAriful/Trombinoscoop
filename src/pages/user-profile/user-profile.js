@@ -22,9 +22,29 @@ export function UserProfile() {
         annee: '',
     })
 
+    const handleChange = e => {
+        setInitialValues(prevValues => ({
+          ...prevValues,
+          [e.target.name]: e.target.value, 
+        }))
+      }
+
     useEffect(() => {
-        fetch('/get_user').then(res => res.json()).then(data => {
-            setInitialValues(data)
+        const emailLocal = localStorage.getItem('email')
+
+        fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+            setInitialValues({
+                status: data.user.status,
+                prenom: data.user.prenom,
+                nom: data.user.nom,
+                email: data.user.email,
+                birthday: data.user.birthday,
+                tel: data.user.tel,
+                matricule: data.user.matricule,
+                faculte: data.user.faculte,
+                cursus: data.user.cursus,
+                annee: data.user.annee
+            })
         })
     }, [])
 
