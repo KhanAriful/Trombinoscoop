@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
@@ -9,8 +9,8 @@ export function EditProfile() {
 
   const [initialValues, setInitialValues] = useState({
     status: '',
-    prenom: 'User',
-    nom: 'User',
+    prenom: 'T',
+    nom: 'T',
     email: '',
     password: '',
     birthday: '',
@@ -21,6 +21,26 @@ export function EditProfile() {
     annee: '',
   })
 
+  useEffect(() => {
+    const emailLocal = localStorage.getItem('email')
+
+    fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+        setInitialValues({
+            status: data.user.status,
+            prenom: data.user.prenom,
+            nom: data.user.nom,
+            email: data.user.email,
+            password: data.user.password,
+            birthday: data.user.birthday,
+            tel: data.user.tel,
+            matricule: data.user.matricule,
+            faculte: data.user.faculte,
+            cursus: data.user.cursus,
+            annee: data.user.annee
+        })
+    })
+}, [])
+
   const handleChange = e => {
     setInitialValues(prevValues => ({
       ...prevValues,
@@ -28,32 +48,25 @@ export function EditProfile() {
     }))
   }
 
-  const listValues = [{
-    status: initialValues.status,
-    prenom: initialValues.prenom,
-    nom: initialValues.nom,
-    email: initialValues.email,
-    password: initialValues.password,
-    birthday: initialValues.birthday,
-    telephone: initialValues.tel,
-    matricule: initialValues.matricule,
-    faculte: initialValues.faculte,
-    cursus: initialValues.cursus,
-    annee: initialValues.annee
-  }]
+  const redirect_Page = (path, time) => {
+    let tID = setTimeout(function () {
+        window.location.href = path;
+        window.clearTimeout(tID);
+    }, time);
+  }
 
-  const handleSubmit = async (state) => {
-    console.log(state);
-    /* const request = await fetch("/add_user", {
+  const handleSubmit = async () => {
+    const emailLocal = localStorage.getItem('email')
+    const request = await fetch(`/update/${emailLocal}`, {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
       },
-      body: JSON.stringify(state)
+      body: JSON.stringify(initialValues)
     })
     if (request.ok){
-      return redirect_Page("/connect", 1000)
-    } */
+      return redirect_Page("/User", 1000)
+    }
 
   }
 
@@ -69,14 +82,14 @@ export function EditProfile() {
             <h2 className="mb-6">Modifier le profile</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-8" placeholder="Nom" name="nom" value={initialValues.nom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-8" placeholder={initialValues.nom} value={initialValues.nom} name="nom" onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Date de naissance" name="birthday" value={initialValues.birthday} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Matricule" name="matricule" value={initialValues.matricule} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-10" placeholder="Téléphone mobile" name="tel" value={initialValues.tel} onChange={handleChange}/>
               </div>
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-6" placeholder="Prenom" name="prenom" value={initialValues.prenom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-6" placeholder={initialValues.prenom} value={initialValues.prenom} name="prenom"  onChange={handleChange}/>
                 <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" type="password" value={initialValues.password} onChange={handleChange}/>
                 <Dropdown title='Faculté' name='faculte' oc={handleChange} listdp={1} />
                 <Dropdown title='Cursus' name='cursus' oc={handleChange} listdp={2} />
@@ -86,7 +99,7 @@ export function EditProfile() {
             </div>
             <button 
               className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
-              onClick={() => handleSubmit(listValues)}
+              onClick={handleSubmit}
             >
                 Sauvegarder
             </button>

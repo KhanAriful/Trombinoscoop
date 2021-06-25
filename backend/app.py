@@ -84,13 +84,37 @@ def verifyUser():
 
 @app.route('/get_user/<emailLocal>', methods=['GET'])
 def getUser(emailLocal):
-    print(emailLocal)
     username = User.objects(email=emailLocal).first()
     if username is not None:
-        print(username.to_json())
         return {'user': username.to_json()}
     else:
         return {'user': 'Utilisateur non trouve'}
+
+@app.route('/update/<emailLocal>', methods=['POST'])
+def updateUser(emailLocal):
+    username = User.objects(email=emailLocal).first()
+    data = request.get_json()
+    print('data', data)
+    print('username',username.to_json())
+    if username is not None:
+        fields = {
+            'status': data['status'],
+            'prenom': data['prenom'], 
+            'nom': data['nom'],
+            'email': data['email'], 
+            'password': data['password'],
+            'birthday': data['birthday'], 
+            'tel': data['tel'],    
+            'matricule': data['matricule'],
+            'faculte': data['faculte'],        
+            'cursus': data['cursus'],       
+            'annee': data['annee'] 
+        }
+        username.update(**fields)
+        return make_response("USER UPDATED", 200)
+    else:
+        print('404')
+        return make_response("USER IN DB", 404)
     
 
 if __name__ == '__main__':
