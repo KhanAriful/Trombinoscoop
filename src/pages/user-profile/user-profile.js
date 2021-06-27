@@ -10,8 +10,8 @@ export function UserProfile() {
 
     const [initialValues, setInitialValues] = useState({
         status: '',
-        prenom: '',
-        nom: '',
+        prenom: 'Uploading...',
+        nom: 'Uploading...',
         email: '',
         password: '',
         birthday: '',
