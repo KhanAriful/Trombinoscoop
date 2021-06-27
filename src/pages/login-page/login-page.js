@@ -3,10 +3,16 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState } from 'react'
 
 export function LoginPage() {
+
+  const history = useHistory()
+
+  const store = (key, value) => {
+    localStorage.setItem(key, value)
+  }
 
   const [initialValues, setInitialValues] = useState({
     email: '',
@@ -20,13 +26,6 @@ export function LoginPage() {
     }))
   }
 
-  const redirect_Page = (path, time) => {
-    let tID = setTimeout(function () {
-        window.location.href = path;
-        window.clearTimeout(tID);
-    }, time);
-  }
-
   const handleSubmit = async () => {
     const request = await fetch("/login", {
       method: "POST",
@@ -35,12 +34,15 @@ export function LoginPage() {
       },
       body: JSON.stringify(initialValues)
     })
-    if (request.ok){
-      localStorage.setItem('isLoggedIn', true)
-      localStorage.setItem('email', initialValues.email)
-      redirect_Page('/Posts', 1000)
+    if (request.ok) {
+      // localStorage.setItem('isLoggedIn', true)
+      // localStorage.setItem('email', initialValues.email)
+      store('isLoggedIn', true)
+      store('email', initialValues.email)
+      history.push('/Posts')
     } else if (request.statusText === 'NOT FOUND') {
-      localStorage.setItem('isLoggedIn', false)
+      // localStorage.setItem('isLoggedIn', false)
+      store('isLoggedIn', false)
     }
   }
   return (

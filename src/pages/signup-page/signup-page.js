@@ -5,11 +5,13 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Dropdown } from '../../components'
 import { v4 as uuid } from 'uuid'
 
 export function SignupPage() {
+
+  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({
     status: '',
@@ -47,15 +49,7 @@ export function SignupPage() {
     annee: initialValues.annee
   }
 
-  const redirect_Page = (path, time) => {
-      let tID = setTimeout(function () {
-          window.location.href = path;
-          window.clearTimeout(tID);
-      }, time);
-  }
-
   const handleSubmit = async (state) => {
-    console.log(state);
     const request = await fetch("/add_user", {
       method: "POST",
       headers: {
@@ -63,12 +57,11 @@ export function SignupPage() {
       },
       body: JSON.stringify(state)
     })
-    if (request.ok){
-      return redirect_Page("/Connexion", 1000)
+    if (request.ok) {
+      history.push('/Connexion')
     } else if (request.statusText === 'NOT FOUND') {
       alert('Cette adresse email est déjà utilisée')
     }
-
   }
 
   return (
