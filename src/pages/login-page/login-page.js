@@ -35,13 +35,10 @@ export function LoginPage() {
       body: JSON.stringify(initialValues)
     })
     if (request.ok) {
-      // localStorage.setItem('isLoggedIn', true)
-      // localStorage.setItem('email', initialValues.email)
       store('isLoggedIn', true)
       store('email', initialValues.email)
       history.push('/Posts')
     } else if (request.statusText === 'NOT FOUND') {
-      // localStorage.setItem('isLoggedIn', false)
       store('isLoggedIn', false)
     }
   }
