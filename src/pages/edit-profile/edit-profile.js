@@ -4,9 +4,11 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import { Input } from '@material-ui/core'
 import { Dropdown, Avatar } from '../../components'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 export function EditProfile() {
+
+  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({
     status: '',
@@ -49,13 +51,6 @@ export function EditProfile() {
     }))
   }
 
-  const redirect_Page = (path, time) => {
-    let tID = setTimeout(function () {
-        window.location.href = path;
-        window.clearTimeout(tID);
-    }, time);
-  }
-
   const handleSubmit = async () => {
     const emailLocal = localStorage.getItem('email')
     const request = await fetch(`/update/${emailLocal}`, {
@@ -66,9 +61,8 @@ export function EditProfile() {
       body: JSON.stringify(initialValues)
     })
     if (request.ok){
-      return redirect_Page("/User", 1000)
+      history.push('/User')
     }
-
   }
 
   const handleDelete = async () => {
@@ -82,7 +76,7 @@ export function EditProfile() {
     })
     if (request.ok){
       localStorage.clear()
-      return redirect_Page("/Connexion", 1000)
+      history.push('/Connexion')
     }
   }
 

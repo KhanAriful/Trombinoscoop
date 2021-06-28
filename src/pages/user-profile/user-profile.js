@@ -10,8 +10,8 @@ export function UserProfile() {
 
     const [initialValues, setInitialValues] = useState({
         status: '',
-        prenom: 'User',
-        nom: 'User',
+        prenom: 'Uploading...',
+        nom: 'Uploading...',
         email: '',
         password: '',
         birthday: '',
@@ -21,13 +21,6 @@ export function UserProfile() {
         cursus: '',
         annee: '',
     })
-
-    const handleChange = e => {
-        setInitialValues(prevValues => ({
-          ...prevValues,
-          [e.target.name]: e.target.value, 
-        }))
-      }
 
     useEffect(() => {
         const emailLocal = localStorage.getItem('email')
