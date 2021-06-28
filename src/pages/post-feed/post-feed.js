@@ -65,7 +65,10 @@ export function PostFeed() {
   }
 
   const handlePost = async () => {
-    
+    setInitialValues(prev => ({
+      ...prev,
+      content: '',
+    }))
     const request = await fetch(`/add_post`, {
       method: "POST",
       headers: {
@@ -80,10 +83,6 @@ export function PostFeed() {
     })
     if (request.ok){
       fetchPosts()
-      setInitialValues(prev => ({
-        ...prev,
-        content: '',
-      }))
     }
   } 
 
@@ -112,7 +111,7 @@ export function PostFeed() {
               <span className="name ml-3">{initialValues.fullName}</span>
             </div>
             <div className="w-full bg-white rounded-xl shadow-lg h-24 relative mb-12">
-              <textarea name='content' placeholder="Ecrivez ici" className="custom-textarea w-full mt-2 pl-6 pt-4 pr-48" onChange={handleChange}>{initialValues.content}</textarea>
+              <textarea name='content' placeholder="Ecrivez ici" className="custom-textarea w-full mt-2 pl-6 pt-4 pr-48" onChange={handleChange} value={initialValues.content} />
               <button className="primary-button post-button rounded-xl px-12 py-2 absolute" 
               onClick={handlePost}>Poster</button>
             </div>
