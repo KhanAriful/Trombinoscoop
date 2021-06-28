@@ -1,4 +1,5 @@
-from flask import *
+from flask import Flask, jsonify, make_response, request, Response
+import json
 from mongoengine import *
 from mongoengine import connect
 import mongoengine as db
@@ -40,6 +41,20 @@ class User(db.Document):
             "faculte": self.faculte,
             "cursus": self.cursus,
             "annee": self.annee
+        }
+
+class Message(db.Document):
+    post_id = db.StringField()
+    fullName = db.StringField()
+    content = db.StringField()
+    date = db.StringField()
+
+    def to_json(self):
+        return {
+            "post_id": self.post_id,
+            "fullName": self.fullName,
+            "content": self.content,
+            "date": self.date
         }
 
 @app.route('/add_user', methods=['POST'])
@@ -118,6 +133,29 @@ def deleteUSer(emailLocal):
         return make_response('', 200)
     else: 
         return make_response('', 404)
+
+@app.route('/add_post', methods=['POST'])
+def addPost():
+    data = request.get_json()
+    if data is not None:
+        post = Message(
+            post_id = data['post_id'],
+            fullName = data['fullName'],
+            content = data['content'], 
+            date = data['date'],
+        )
+        post.save()
+        return make_response("POST CREATED", 200)
+    else:
+        return make_response("DATA IS EMPTY", 404)
+
+@app.route('/get_post', methods=['GET'])
+def getPosts():
+    posts = []
+    for post in Message.objects:
+        posts.append(post.to_json())
+    posts_json = json.dumps(posts)
+    return posts_json 
 
     
 

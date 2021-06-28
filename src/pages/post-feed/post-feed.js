@@ -2,16 +2,9 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
-
-const PostData = [
-  {name: 'Ariful Khan', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Loan Cleris', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Martin Curtet', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Martin Curtet', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Martin Curtet', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Martin Curtet', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'},
-  {name: 'Martin Curtet', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius metus quis ornare interdum. Mauris sit amet urna diam. Ut dolor ipsum, commodo ac odio quis, pharetra ultrices sapien.', date: '13 juin, 2021'}
-]
+import { useHistory } from 'react-router-dom'
+import { v4 as uuid } from 'uuid'
+import { Store } from 'tough-cookie'
 
 const Post = props => {
   const { name, content, date } = props
@@ -35,7 +28,78 @@ const Post = props => {
 } 
 
 export function PostFeed() {
-  
+
+  const history = useHistory()
+
+  const [initialValues, setInitialValues] = useState({
+    content: '',
+    user_id: '',
+    nom: 'Uploading..',
+    prenom: 'Uploading..',
+    fullName: '',
+  })
+
+  useEffect(() => {
+    const emailLocal = localStorage.getItem('email')
+
+    fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+      setInitialValues(prev => ({
+        ...prev,
+        user_id: data.user.user_id,
+        nom: data.user.nom,
+        prenom: data.user.prenom,
+        fullName: data.user.prenom +' '+ data.user.nom,
+      }))
+    })
+  }, [])
+
+  const [postes, setPostes] = useState([])
+
+  console.log('initialValues', initialValues)
+
+  const handleChange = e => {
+    setInitialValues(prevValues => ({
+      ...prevValues,
+      [e.target.name]: e.target.value, 
+    }))
+  }
+
+  const handlePost = async () => {
+    
+    const request = await fetch(`/add_post`, {
+      method: "POST",
+      headers: {
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        post_id: uuid(),
+        fullName: initialValues.fullName,
+        content: initialValues.content,
+        date: Date.now().toString(),
+      })
+    })
+    if (request.ok){
+      fetchPosts()
+      setInitialValues(prev => ({
+        ...prev,
+        content: '',
+      }))
+    }
+  } 
+
+  const fetchPosts = () => {
+    fetch(`/get_post`).then(res => res.json()).then(data => {
+      setPostes(data)
+      console.log(postes)
+    })
+  }
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  console.log(postes)
+
   return (
     <>
       <Wrapper>
@@ -44,18 +108,21 @@ export function PostFeed() {
           <div className="w-9/12 mr-4 ml-6 pt-8">
             <span className="bonjour">Bonjour,</span>
             <div className="flex items-center mt-3 mb-6">
-              <Avatar initial="Ariful Khan" />
-              <span className="name ml-3">Ariful Khan</span>
+              <Avatar initial={`${initialValues.prenom} + '' + ${initialValues.nom}`}/>
+              <span className="name ml-3">{initialValues.fullName}</span>
             </div>
             <div className="w-full bg-white rounded-xl shadow-lg h-24 relative mb-12">
-              <textarea placeholder="Ecrivez ici" className="custom-textarea w-full mt-2 pl-6 pt-4 pr-48"></textarea>
-              <button className="primary-button post-button rounded-xl px-12 py-2 absolute">Poster</button>
+              <textarea name='content' placeholder="Ecrivez ici" className="custom-textarea w-full mt-2 pl-6 pt-4 pr-48" onChange={handleChange}>{initialValues.content}</textarea>
+              <button className="primary-button post-button rounded-xl px-12 py-2 absolute" 
+              onClick={handlePost}>Poster</button>
             </div>
-            {PostData.map(data => <Post
-              name={data.name}
-              content={data.content}
-              date={data.date}
-            />)}
+            {postes.map((data) => 
+              <Post
+                name={data.fullName}
+                content={data.content}
+                date={data.date}
+              />
+            )}
           </div>
           <div className="w-3/12 ml-4 mr-6">
             <CardUser name="Loan CLERIS" fonction="Fullstacks" />
