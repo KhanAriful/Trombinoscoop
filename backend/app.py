@@ -26,6 +26,7 @@ class User(db.Document):
     faculte = db.StringField()
     cursus = db.StringField()
     annee = db.StringField()
+    avatar = db.StringField()
 
     def to_json(self):
         return {
@@ -40,7 +41,8 @@ class User(db.Document):
             "matricule": self.matricule,
             "faculte": self.faculte,
             "cursus": self.cursus,
-            "annee": self.annee
+            "annee": self.annee,
+            "avatar": self.avatar
         }
 
 class Message(db.Document):
@@ -86,7 +88,8 @@ def addUser():
             matricule = data['matricule'],
             faculte = data['faculte'],        
             cursus = data['cursus'],       
-            annee = data['annee'] 
+            annee = data['annee'],
+            avatar = data['avatar']
         )
         user.save()
         return make_response("USER CREATED", 200)
@@ -129,7 +132,7 @@ def updateUser(emailLocal):
             'matricule': data['matricule'],
             'faculte': data['faculte'],        
             'cursus': data['cursus'],       
-            'annee': data['annee'] 
+            'annee': data['annee']
         }
         username.update(**fields)
         return make_response("USER UPDATED", 200)
