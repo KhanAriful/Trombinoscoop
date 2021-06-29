@@ -67,24 +67,26 @@ export function PostFeed() {
   }
 
   const handlePost = async () => {
-    setInitialValues(prev => ({
-      ...prev,
-      content: '',
-    }))
-    const request = await fetch(`/add_post`, {
-      method: "POST",
-      headers: {
-          'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        post_id: uuid(),
-        fullName: initialValues.fullName,
-        content: initialValues.content,
-        date: Date.now().toString(),
+    if (initialValues.content!=='') {
+      setInitialValues(prev => ({
+        ...prev,
+        content: '',
+      }))
+      const request = await fetch(`/add_post`, {
+        method: "POST",
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          post_id: uuid(),
+          fullName: initialValues.fullName,
+          content: initialValues.content,
+          date: Date.now().toString(),
+        })
       })
-    })
-    if (request.ok){
-      fetchPosts()
+      if (request.ok){
+        fetchPosts()
+      }
     }
   } 
 
