@@ -134,7 +134,8 @@ def updateUser(emailLocal):
             'matricule': data['matricule'],
             'faculte': data['faculte'],        
             'cursus': data['cursus'],       
-            'annee': data['annee']
+            'annee': data['annee'],
+            'avatar': data['avatar']
         }
         username.update(**fields)
         return make_response("USER UPDATED", 200)
