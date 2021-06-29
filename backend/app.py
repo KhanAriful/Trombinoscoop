@@ -184,5 +184,19 @@ def getAllUsers():
     posts_json = json.dumps(users)
     return posts_json 
 
+@app.route('/add_friends', methods=['POST'])
+def addFriends():
+    data = request.get_json()
+    if data is not None:
+        amis = Friends(
+            id = data['post_id'],
+            userA = data['userA'],
+            userB = data['userB'],
+        )
+        amis.save()
+        return make_response("FRIENDS CREATED", 200)
+    else:
+        return make_response("DATA IS EMPTY", 404)
+
 if __name__ == '__main__':
     app.run(debug=True)
