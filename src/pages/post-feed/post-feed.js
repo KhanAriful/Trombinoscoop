@@ -102,6 +102,9 @@ export function PostFeed() {
 
   useEffect(() => {
     fetchPosts()
+    setInterval(() => {
+      fetchPosts()
+    }, 15000)
   }, [])
 
   useEffect(() => {
