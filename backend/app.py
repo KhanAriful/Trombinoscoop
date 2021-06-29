@@ -50,13 +50,15 @@ class Message(db.Document):
     fullName = db.StringField()
     content = db.StringField()
     date = db.StringField()
+    avatar = db.StringField()
 
     def to_json(self):
         return {
             "post_id": self.post_id,
             "fullName": self.fullName,
             "content": self.content,
-            "date": self.date
+            "date": self.date,
+            "avatar": self.avatar
         }
 
 class Friends(db.Document):
@@ -158,6 +160,7 @@ def addPost():
             fullName = data['fullName'],
             content = data['content'], 
             date = data['date'],
+            avatar = data['avatar']
         )
         post.save()
         return make_response("POST CREATED", 200)
