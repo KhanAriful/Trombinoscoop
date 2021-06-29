@@ -56,6 +56,7 @@ export function PostFeed() {
   const [postes, setPostes] = useState([])
   const [listUsers, setListUsers] = useState([])
 
+  const exceptMe = listUsers.filter(data => data.email !== localStorage.getItem('email'))
 
   console.log('initialValues', initialValues)
 
@@ -144,7 +145,7 @@ export function PostFeed() {
             )}
           </div>
           <div className="w-3/12 ml-4 mr-6">
-            {listUsers.map((data) => 
+            {exceptMe.map((data) => 
               <CardUser 
                 name={data.prenom + ' ' + data.nom} 
                 fonction={data.cursus}
