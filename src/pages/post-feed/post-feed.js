@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
-import { useHistory } from 'react-router-dom'
+import { formatDate } from './../../utils'
 import { v4 as uuid } from 'uuid'
 import { Store } from 'tough-cookie'
 
@@ -20,7 +20,7 @@ const Post = props => {
           {content}
         </span>
         <span className="post-date block text-right">
-          Publiée le {date}
+          Publiée {date.toLowerCase()}
         </span>
       </div>
     </div>
@@ -28,8 +28,6 @@ const Post = props => {
 } 
 
 export function PostFeed() {
-
-  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({
     content: '',
@@ -134,7 +132,7 @@ export function PostFeed() {
               <Post
                 name={data.fullName}
                 content={data.content}
-                date={data.date}
+                date={formatDate(parseInt(data.date))}
               />
             )}
           </div>
