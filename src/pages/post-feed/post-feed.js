@@ -90,8 +90,7 @@ export function PostFeed() {
 
   const fetchPosts = async () => {
     await fetch(`/get_post`).then(res => res.json()).then(data => {
-      setPostes(data)
-      console.log(postes)
+      setPostes(data.reverse())
     })
   }
 
@@ -129,7 +128,7 @@ export function PostFeed() {
               <button className="primary-button post-button rounded-xl px-12 py-2 absolute" 
               onClick={handlePost}>Poster</button>
             </div>
-            {postes.reverse().map((data) => 
+            {postes.map((data) => 
               <Post
                 name={data.fullName}
                 content={data.content}
