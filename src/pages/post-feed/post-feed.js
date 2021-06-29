@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
-import { useHistory } from 'react-router-dom'
+import { formatDate } from './../../utils'
 import { v4 as uuid } from 'uuid'
 import { Store } from 'tough-cookie'
 
@@ -15,12 +15,12 @@ const Post = props => {
         <Avatar initial={name} />
         <span className="post-name mt-2">{name}</span>
       </div>
-      <div className="w-5/6 pr-6">
+      <div className="w-5/6 pl-4 pr-6 flex flex-col justify-between">
         <span className="post-contents block">
           {content}
         </span>
         <span className="post-date block text-right">
-          Publiée le {date}
+          Publiée {date.toLowerCase()}
         </span>
       </div>
     </div>
@@ -28,8 +28,6 @@ const Post = props => {
 } 
 
 export function PostFeed() {
-
-  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({
     content: '',
@@ -67,31 +65,32 @@ export function PostFeed() {
   }
 
   const handlePost = async () => {
-    setInitialValues(prev => ({
-      ...prev,
-      content: '',
-    }))
-    const request = await fetch(`/add_post`, {
-      method: "POST",
-      headers: {
-          'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        post_id: uuid(),
-        fullName: initialValues.fullName,
-        content: initialValues.content,
-        date: Date.now().toString(),
+    if (initialValues.content!=='') {
+      setInitialValues(prev => ({
+        ...prev,
+        content: '',
+      }))
+      const request = await fetch(`/add_post`, {
+        method: "POST",
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          post_id: uuid(),
+          fullName: initialValues.fullName,
+          content: initialValues.content,
+          date: Date.now().toString(),
+        })
       })
-    })
-    if (request.ok){
-      fetchPosts()
+      if (request.ok){
+        fetchPosts()
+      }
     }
   } 
 
   const fetchPosts = async () => {
     await fetch(`/get_post`).then(res => res.json()).then(data => {
-      setPostes(data)
-      console.log(postes)
+      setPostes(data.reverse())
     })
   }
 
@@ -129,11 +128,11 @@ export function PostFeed() {
               <button className="primary-button post-button rounded-xl px-12 py-2 absolute" 
               onClick={handlePost}>Poster</button>
             </div>
-            {postes.reverse().map((data) => 
+            {postes.map((data) => 
               <Post
                 name={data.fullName}
                 content={data.content}
-                date={data.date}
+                date={formatDate(parseInt(data.date))}
               />
             )}
           </div>
