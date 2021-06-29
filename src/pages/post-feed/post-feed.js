@@ -149,6 +149,7 @@ export function PostFeed() {
                 name={data.prenom + ' ' + data.nom} 
                 fonction={data.cursus}
                 color={data.avatar}
+                email={data.email}
               />
             )}
           </div>

@@ -198,3 +198,11 @@ h2 {
   
   color: #474646;  
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.removr-border:focus {
+  outline: none;
+}

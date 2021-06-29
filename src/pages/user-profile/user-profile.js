@@ -8,6 +8,9 @@ import { Navbar, Avatar } from '../../components'
 
 export function UserProfile() {
 
+    const pathArray = window.location.pathname.split('/');
+    const param = pathArray[2];
+
     const [initialValues, setInitialValues] = useState({
         status: '',
         prenom: 'Uploading...',
@@ -24,7 +27,12 @@ export function UserProfile() {
     })
 
     useEffect(() => {
-        const emailLocal = localStorage.getItem('email')
+        let emailLocal
+        if (param === undefined) {
+            emailLocal = localStorage.getItem('email')
+        } else {
+            emailLocal = param
+        }
 
         fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
             setInitialValues({
@@ -58,8 +66,8 @@ export function UserProfile() {
                 <Overlay className="flex justify-center items-center">
                 <div className="bg-white w-2/6 flex items-center flex-col rounded-2xl shadow-xl py-8 mt-10">
                     <Avatar color={initialValues.avatar} initial={initialValues.prenom + initialValues.nom} large={true}/>
-                    <h2 className="mb-6">Mon profile</h2>
-                    <div className="flex items-start mb-8 justify-start flex-col w-4/6 text-justify">
+                    <h2 className="mt-3 mb-6">{param===undefined ? 'Mon profil' : `Profil de ${initialValues.prenom}`}</h2>
+                    <div className="flex items-start justify-start flex-col w-4/6 text-justify">
                         <p>{getUserValues('Nom', initialValues.nom)}</p>
                         <p>{getUserValues('Prénom', initialValues.prenom)}</p>
                         <p>{getUserValues('Date de naissance', initialValues.birthday)}</p>
@@ -72,9 +80,10 @@ export function UserProfile() {
                         <p>{getUserValues('Status', initialValues.status)}</p>
                     </div>
                     <Link to='/Modifier'>
-                        <button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">
-                            Modifier mon profile
-                        </button>
+                        {param===undefined &&
+                        <button className="button-text border-2 border-black rounded-xl px-12 py-1 mt-4">
+                        Modifier mon profile
+                        </button>}
                     </Link>
                 </div>
                 </Overlay>

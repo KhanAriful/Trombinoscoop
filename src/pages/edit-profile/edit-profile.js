@@ -39,7 +39,8 @@ export function EditProfile() {
             matricule: data.user.matricule,
             faculte: data.user.faculte,
             cursus: data.user.cursus,
-            annee: data.user.annee
+            annee: data.user.annee,
+            avatar: data.user.avatar,
         })
     })
 }, [])
