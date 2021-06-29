@@ -115,7 +115,7 @@ export function PostFeed() {
               <button className="primary-button post-button rounded-xl px-12 py-2 absolute" 
               onClick={handlePost}>Poster</button>
             </div>
-            {postes.map((data) => 
+            {postes.reverse().map((data) => 
               <Post
                 name={data.fullName}
                 content={data.content}
