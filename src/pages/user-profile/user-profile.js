@@ -20,6 +20,7 @@ export function UserProfile() {
         faculte: '',
         cursus: '',
         annee: '',
+        avatar: '',
     })
 
     useEffect(() => {
@@ -36,7 +37,8 @@ export function UserProfile() {
                 matricule: data.user.matricule,
                 faculte: data.user.faculte,
                 cursus: data.user.cursus,
-                annee: data.user.annee
+                annee: data.user.annee,
+                avatar: data.user.avatar,
             })
         })
     }, [])
@@ -55,7 +57,7 @@ export function UserProfile() {
                 <Navbar />
                 <Overlay className="flex justify-center items-center">
                 <div className="bg-white w-2/6 flex items-center flex-col rounded-2xl shadow-xl py-8 mt-10">
-                    <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
+                    <Avatar color={initialValues.avatar} initial={initialValues.prenom + initialValues.nom} large={true}/>
                     <h2 className="mb-6">Mon profile</h2>
                     <div className="flex items-start mb-8 justify-start flex-col w-4/6 text-justify">
                         <p>{getUserValues('Nom', initialValues.nom)}</p>

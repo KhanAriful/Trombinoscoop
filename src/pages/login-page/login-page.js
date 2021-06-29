@@ -37,6 +37,7 @@ export function LoginPage() {
     if (request.ok) {
       store('isLoggedIn', true)
       store('email', initialValues.email)
+      store('avatar', initialValues.avatar)
       history.push('/Posts')
     } else if (request.statusText === 'NOT FOUND') {
       store('isLoggedIn', false)

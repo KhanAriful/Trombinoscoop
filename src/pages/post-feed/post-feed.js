@@ -7,12 +7,12 @@ import { v4 as uuid } from 'uuid'
 import { Store } from 'tough-cookie'
 
 const Post = props => {
-  const { name, content, date } = props
+  const { name, content, date, color } = props
 
   return (
     <div className="flex w-full bg-white rounded-xl shadow-lg my-6 py-6">
       <div className="w-1/6 flex flex-col justify-center items-center">
-        <Avatar initial={name} />
+        <Avatar color={color} initial={name} />
         <span className="post-name mt-2">{name}</span>
       </div>
       <div className="w-5/6 pl-4 pr-6 flex flex-col justify-between">
@@ -35,6 +35,7 @@ export function PostFeed() {
     nom: 'Uploading..',
     prenom: 'Uploading..',
     fullName: '',
+    avatar: '',
   })
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export function PostFeed() {
         nom: data.user.nom,
         prenom: data.user.prenom,
         fullName: data.user.prenom +' '+ data.user.nom,
+        avatar: data.user.avatar,
       }))
     })
   }, [])
@@ -80,6 +82,7 @@ export function PostFeed() {
           fullName: initialValues.fullName,
           content: initialValues.content,
           date: Date.now().toString(),
+          avatar: initialValues.avatar,
         })
       })
       if (request.ok){
@@ -123,7 +126,7 @@ export function PostFeed() {
           <div className="w-9/12 mr-4 ml-6 pt-8">
             <span className="bonjour">Bonjour,</span>
             <div className="flex items-center mt-3 mb-6">
-              <Avatar initial={`${initialValues.prenom} + '' + ${initialValues.nom}`}/>
+              <Avatar color={initialValues.avatar} initial={`${initialValues.prenom} + '' + ${initialValues.nom}`}/>
               <span className="name ml-3">{initialValues.fullName}</span>
             </div>
             <div className="w-full bg-white rounded-xl shadow-lg h-24 relative mb-12">
@@ -136,6 +139,7 @@ export function PostFeed() {
                 name={data.fullName}
                 content={data.content}
                 date={formatDate(parseInt(data.date))}
+                color={data.avatar}
               />
             )}
           </div>
@@ -144,6 +148,7 @@ export function PostFeed() {
               <CardUser 
                 name={data.prenom + ' ' + data.nom} 
                 fonction={data.cursus}
+                color={data.avatar}
               />
             )}
           </div>

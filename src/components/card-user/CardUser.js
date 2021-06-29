@@ -3,12 +3,12 @@ import AddIcon from './../../assets/images/add-friend.svg'
 import { Avatar } from './../avatar'
 import { Link } from 'react-router-dom'
 
-export function CardUser({ name, fonction }) {
+export function CardUser({ name, fonction, color }) {
     return (
         <Link to="/">
             <Wrapper className="friend-card my-4 shadow-lg hover:shadow-xl w-full flex flex-row justify-between rounded-xl">
                 <div className="flex flex-col justify-center ml-6 w-1/6">
-                    <Avatar initial={name} />
+                    <Avatar color={color} initial={name} />
                 </div>
                 <div className="flex flex-col justify-center w-6/12">
                     <span className="card-name">{name}</span>
