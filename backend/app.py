@@ -57,6 +57,18 @@ class Message(db.Document):
             "date": self.date
         }
 
+class Friends(db.Document):
+    id = db.StringField()
+    userA = db.StringField()
+    userB = db.StringField()
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "userA": self.userA,
+            "userB": self.userB,
+        }
+
 @app.route('/add_user', methods=['POST'])
 def addUser():
     data = request.get_json()
@@ -157,7 +169,13 @@ def getPosts():
     posts_json = json.dumps(posts)
     return posts_json 
 
-    
+@app.route('/all_user', methods=['GET'])
+def getAllUsers():
+    users = []
+    for user in User.objects:
+        users.append(user.to_json())
+    posts_json = json.dumps(users)
+    return posts_json 
 
 if __name__ == '__main__':
     app.run(debug=True)

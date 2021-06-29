@@ -54,6 +54,8 @@ export function PostFeed() {
   }, [])
 
   const [postes, setPostes] = useState([])
+  const [listUsers, setListUsers] = useState([])
+
 
   console.log('initialValues', initialValues)
 
@@ -86,10 +88,16 @@ export function PostFeed() {
     }
   } 
 
-  const fetchPosts = () => {
-    fetch(`/get_post`).then(res => res.json()).then(data => {
+  const fetchPosts = async () => {
+    await fetch(`/get_post`).then(res => res.json()).then(data => {
       setPostes(data)
       console.log(postes)
+    })
+  }
+
+  const fetchUsers = async () => {
+    await fetch(`/all_user`).then(res => res.json()).then(data => {
+      setListUsers(data)
     })
   }
 
@@ -97,7 +105,13 @@ export function PostFeed() {
     fetchPosts()
   }, [])
 
+  useEffect(() => {
+    fetchUsers()
+  }, [])
+
   console.log(postes)
+  console.log(listUsers)
+
 
   return (
     <>
@@ -124,9 +138,12 @@ export function PostFeed() {
             )}
           </div>
           <div className="w-3/12 ml-4 mr-6">
-            <CardUser name="Loan CLERIS" fonction="Fullstacks" />
-            <CardUser name="Ariful KHAN" fonction="Fullstacks" />
-            <CardUser name="Martin CURTET" fonction="Fullstacks" />
+            {listUsers.map((data) => 
+              <CardUser 
+                name={data.prenom + ' ' + data.nom} 
+                fonction={data.cursus}
+              />
+            )}
           </div>
         </div>
       </Wrapper>
