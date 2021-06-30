@@ -67,15 +67,19 @@ export function PostFeed() {
   // console.log('Test', myFriends)
 
   const myFriendsFromA = myFriends.filter(list => list.userA === me)
-  myFriendsFromA.map(data => (
-    console.log('My Friend 🥳', data.userB)
-  ))
 
   const myFriendsFromB = myFriends.filter(list => list.userB === me)
-  myFriendsFromB.map(data => (
-    console.log('My Friend 🥳', data.userA)
-  ))
 
+  const ami = []
+  myFriendsFromA.forEach(data => {
+    ami.push(data.userB)
+    return ami
+  });
+  myFriendsFromB.forEach(data => {
+    ami.push(data.userA)
+    return ami
+  });
+  console.log(ami)
 
   const handleChange = e => {
     setInitialValues(prevValues => ({

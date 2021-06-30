@@ -188,6 +188,9 @@ def getAllUsers():
 def addFriends():
     data = request.get_json()
     if data is not None:
+        for ami in Friends.objects:
+            if (ami.userA == data['userA'] and ami.userB == data['userB']) or (ami.userA == data['userB'] and ami.userB == data['userA']):
+                return make_response("ALREADY FRIENDS", 404)
         amis = Friends(
             f_id = data['post_id'],
             userA = data['userA'],
