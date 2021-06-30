@@ -15,7 +15,7 @@ const Post = props => {
         <span className="post-name mt-2">{name}</span>
       </div>
       <div className="w-5/6 pl-4 pr-6 flex flex-col justify-between">
-        <span className="post-contents block">
+        <span className="break-words post-contents block">
           {content}
         </span>
         <span className="post-date block text-right">
