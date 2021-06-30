@@ -58,6 +58,25 @@ export function PostFeed() {
 
   const exceptMe = listUsers.filter(data => data.email !== localStorage.getItem('email'))
 
+  const [myRealFriends, setMyRealFriends] = useState([])
+
+  let me = localStorage.getItem('email')
+  const allUsers = listUsers
+  const myFriends = listFriends
+  // const notMyFriends = 
+  // console.log('Test', myFriends)
+
+  const myFriendsFromA = myFriends.filter(list => list.userA === me)
+  myFriendsFromA.map(data => (
+    console.log('My Friend 🥳', data.userB)
+  ))
+
+  const myFriendsFromB = myFriends.filter(list => list.userB === me)
+  myFriendsFromB.map(data => (
+    console.log('My Friend 🥳', data.userA)
+  ))
+
+
   const handleChange = e => {
     setInitialValues(prevValues => ({
       ...prevValues,
@@ -111,22 +130,12 @@ export function PostFeed() {
 
   useEffect(() => {
     fetchPosts()
+    fetchUsers()
+    fetchFriends()
     setInterval(() => {
       fetchPosts()
     }, 15000)
   }, [])
-
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  useEffect(() => {
-    fetchFriends()
-    setInterval(() => {
-      fetchFriends()
-    }, 30000)
-  }, [])
-  console.log('groupe amis', listFriends)
 
   return (
     <>
