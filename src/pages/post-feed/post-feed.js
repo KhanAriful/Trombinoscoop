@@ -4,7 +4,6 @@ import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
 import { formatDate } from './../../utils'
 import { v4 as uuid } from 'uuid'
-import { Store } from 'tough-cookie'
 
 const Post = props => {
   const { name, content, date, color } = props
