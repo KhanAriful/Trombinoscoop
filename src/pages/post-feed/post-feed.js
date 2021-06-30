@@ -81,6 +81,8 @@ export function PostFeed() {
   });
   console.log(ami)
 
+  
+
   const handleChange = e => {
     setInitialValues(prevValues => ({
       ...prevValues,
@@ -167,14 +169,17 @@ export function PostFeed() {
             )}
           </div>
           <div className="w-3/12 ml-4 mr-6">
-            {exceptMe.map((data) => 
-              <CardUser 
-                name={data.prenom + ' ' + data.nom} 
-                fonction={data.cursus}
-                color={data.avatar}
-                email={data.email}
-              />
-            )}
+            {ami.map(data => (
+              exceptMe.filter(dataFilter => dataFilter.email === data).map(dataMap => (
+                <CardUser 
+                  name={dataMap.prenom + ' ' + dataMap.nom}
+                  fonction={dataMap.cursus}
+                  color={dataMap.avatar}
+                  email={dataMap.email}
+                />
+              ))
+            ))        
+            }
           </div>
         </div>
       </Wrapper>
