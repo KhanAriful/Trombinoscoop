@@ -51,6 +51,5 @@ export function CardUser({ name, fonction, color, email }) {
 const Wrapper = styled.main`
   height: 72px;
   background-attachment: fixed;
-  overflow-y: scroll;
   background-color: #fff;
 `
