@@ -62,13 +62,13 @@ class Message(db.Document):
         }
 
 class Friends(db.Document):
-    id = db.StringField()
+    f_id = db.StringField()
     userA = db.StringField()
     userB = db.StringField()
 
     def to_json(self):
         return {
-            "id": self.id,
+            "f_id": self.f_id,
             "userA": self.userA,
             "userB": self.userB,
         }
@@ -189,7 +189,7 @@ def addFriends():
     data = request.get_json()
     if data is not None:
         amis = Friends(
-            id = data['post_id'],
+            f_id = data['post_id'],
             userA = data['userA'],
             userB = data['userB'],
         )
@@ -197,6 +197,18 @@ def addFriends():
         return make_response("FRIENDS CREATED", 200)
     else:
         return make_response("DATA IS EMPTY", 404)
+
+@app.route('/get_friends/<emailLocal>', methods=['GET'])
+def getFriends(emailLocal):
+    list_ami = []
+    for ami in Friends.objects:
+        if ami.userA == emailLocal:
+            list_ami.append(ami.to_json())
+        elif ami.userB == emailLocal:
+            list_ami.append(ami.to_json())
+    ami_json = json.dumps(list_ami)
+    return ami_json
+
 
 if __name__ == '__main__':
     app.run(debug=True)

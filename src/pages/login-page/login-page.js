@@ -43,6 +43,13 @@ export function LoginPage() {
       store('isLoggedIn', false)
     }
   }
+
+  const handleKey = (e) => {
+    if(e.key === 'Enter') {
+      handleSubmit()
+    }
+  }
+
   return (
     <>
       <MetaTags>
@@ -53,8 +60,8 @@ export function LoginPage() {
           <div className="bg-white w-96 flex items-center flex-col rounded-2xl shadow-xl py-8">
             <Logo className="mb-2" src={LogoImg} alt="trombinoscoop" />
             <h2 className="mb-4">Connexion</h2>
-            <Input className="w-4/5 px-4 mb-6" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange} />
-            <Input className="w-4/5 px-4 mb-8" type='password' placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange} />
+            <Input className="w-4/5 px-4 mb-6" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange} onKeyPress={handleKey}/>
+            <Input className="w-4/5 px-4 mb-8" type='password' placeholder="Mot de passe" name="password" value={initialValues.password} onChange={handleChange} onKeyPress={handleKey}/>
             <button onClick={handleSubmit} className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8">Go</button>
             <Link to="/Inscription"><span className="link">Je n’ai pas de compte, je m’inscris</span></Link>
           </div>

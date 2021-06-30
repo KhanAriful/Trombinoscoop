@@ -55,10 +55,9 @@ export function PostFeed() {
 
   const [postes, setPostes] = useState([])
   const [listUsers, setListUsers] = useState([])
+  const [listFriends, setListFriends] = useState([])
 
   const exceptMe = listUsers.filter(data => data.email !== localStorage.getItem('email'))
-
-  console.log('initialValues', initialValues)
 
   const handleChange = e => {
     setInitialValues(prevValues => ({
@@ -104,6 +103,13 @@ export function PostFeed() {
     })
   }
 
+  const fetchFriends = async () => {
+    const emailLocal = localStorage.getItem('email')
+    await fetch(`/get_friends/${emailLocal}`).then(res => res.json()).then(data => {
+      setListFriends(data)
+    })
+  }
+
   useEffect(() => {
     fetchPosts()
     setInterval(() => {
@@ -115,9 +121,13 @@ export function PostFeed() {
     fetchUsers()
   }, [])
 
-  console.log(postes)
-  console.log(listUsers)
-
+  useEffect(() => {
+    fetchFriends()
+    setInterval(() => {
+      fetchFriends()
+    }, 30000)
+  }, [])
+  console.log('groupe amis', listFriends)
 
   return (
     <>
