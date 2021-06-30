@@ -59,7 +59,7 @@ export function UserProfile() {
     return (
         <>
             <MetaTags>
-                <title>Mon profile</title>
+                <title>Mon profil</title>
             </MetaTags>
             <Wrapper>
                 <Navbar />
@@ -82,7 +82,7 @@ export function UserProfile() {
                     <Link to='/Modifier'>
                         {param===undefined &&
                         <button className="button-text border-2 border-black rounded-xl px-12 py-1 mt-4">
-                        Modifier mon profile
+                        Modifier mon profil
                         </button>}
                     </Link>
                 </div>
