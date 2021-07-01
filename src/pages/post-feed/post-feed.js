@@ -58,13 +58,8 @@ export function PostFeed() {
 
   const exceptMe = listUsers.filter(data => data.email !== localStorage.getItem('email'))
 
-  const [myRealFriends, setMyRealFriends] = useState([])
-
   let me = localStorage.getItem('email')
-  const allUsers = listUsers
   const myFriends = listFriends
-  // const notMyFriends = 
-  // console.log('Test', myFriends)
 
   const myFriendsFromA = myFriends.filter(list => list.userA === me)
 
@@ -73,15 +68,17 @@ export function PostFeed() {
   const ami = []
   myFriendsFromA.forEach(data => {
     ami.push(data.userB)
-    return ami
-  });
+  })
   myFriendsFromB.forEach(data => {
     ami.push(data.userA)
-    return ami
-  });
-  console.log(ami)
+  })
 
-  
+  const allEmails = []
+  exceptMe.map(data => (
+    allEmails.push(data.email)
+  ))
+
+  const pasAmi = allEmails.filter(data => !ami.includes(data))
 
   const handleChange = e => {
     setInitialValues(prevValues => ({
@@ -169,6 +166,7 @@ export function PostFeed() {
             )}
           </div>
           <div className="w-3/12 ml-4 mr-6">
+            <h3 className="name ml-3 mt-8">Mes amis</h3>
             {ami.map(data => (
               exceptMe.filter(dataFilter => dataFilter.email === data).map(dataMap => (
                 <CardUser 
@@ -176,6 +174,19 @@ export function PostFeed() {
                   fonction={dataMap.cursus}
                   color={dataMap.avatar}
                   email={dataMap.email}
+                />
+              ))
+            ))        
+            }
+            <h3 className="name ml-3 mt-6">Utilisateurs</h3>
+            {pasAmi.map(data => (
+              exceptMe.filter(dataFilter => dataFilter.email === data).map(dataMap => (
+                <CardUser 
+                  name={dataMap.prenom + ' ' + dataMap.nom}
+                  fonction={dataMap.cursus}
+                  color={dataMap.avatar}
+                  email={dataMap.email}
+                  button={true}
                 />
               ))
             ))        

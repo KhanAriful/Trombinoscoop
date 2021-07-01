@@ -4,7 +4,7 @@ import { Avatar } from './../avatar'
 import { useHistory } from 'react-router-dom'
 import { v4 as uuid } from 'uuid'
 
-export function CardUser({ name, fonction, color, email }) {
+export function CardUser({ name, fonction, color, email, button }) {
     const history = useHistory()
 
     const handleClick = () => {
@@ -39,10 +39,11 @@ export function CardUser({ name, fonction, color, email }) {
                 <span className="card-name">{name}</span>
                 <span className="card-fonction">{fonction}</span>
             </div>
-            <div className="flex justify-center items-center w-1/6">
+            <div onClick={!button && handleClick} className="flex justify-center items-center w-1/6">
+                {button &&
                 <button className="removr-border" onClick={addFriend}>
                     <img className="mr-2" src={AddIcon} alt="add" />
-                </button>
+                </button>}
             </div>
         </Wrapper>
     )
