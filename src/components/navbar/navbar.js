@@ -18,7 +18,7 @@ export function Navbar() {
         </Link>
         <div className="flex flex-row items-center">
           <Link to="/User"><button className="primary-button rounded-xl px-12 py-2">Voir mon profil</button></Link>
-          <Link to="/Connexion"><button className="secondary-button rounded-xl px-12 py-2 ml-3" onClick={logout}>Deconnexion</button></Link>
+          <Link to="/Connexion"><button className="secondary-button rounded-xl px-12 py-2 ml-3" onClick={logout}>Déconnexion</button></Link>
         </div>
       </div>
     </header>

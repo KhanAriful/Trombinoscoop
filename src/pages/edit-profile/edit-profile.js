@@ -84,13 +84,13 @@ export function EditProfile() {
   return (
     <>
       <MetaTags>
-        <title>Modifier le profile</title>
+        <title>Modifier le profil</title>
       </MetaTags>
       <Wrapper>
         <Overlay className="flex justify-center items-center">
           <div className="bg-white w-4/6 flex items-center flex-col rounded-2xl shadow-xl py-8">
             <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
-            <h2 className="mb-6">Modifier le profile</h2>
+            <h2 className="mb-6">Modifier le profil</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
                 <Input className="w-full px-4 mb-8" placeholder={initialValues.nom} value={initialValues.nom} name="nom" onChange={handleChange}/>
@@ -109,7 +109,7 @@ export function EditProfile() {
               </div>
             </div>
             <div className='flex'>
-              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8" > retour </button></Link>
+              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8" > Retour </button></Link>
               <button 
                 className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
                 onClick={handleDelete}
