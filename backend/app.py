@@ -26,6 +26,7 @@ class User(db.Document):
     faculte = db.StringField()
     cursus = db.StringField()
     annee = db.StringField()
+    avatar = db.StringField()
 
     def to_json(self):
         return {
@@ -40,7 +41,8 @@ class User(db.Document):
             "matricule": self.matricule,
             "faculte": self.faculte,
             "cursus": self.cursus,
-            "annee": self.annee
+            "annee": self.annee,
+            "avatar": self.avatar
         }
 
 class Message(db.Document):
@@ -48,13 +50,27 @@ class Message(db.Document):
     fullName = db.StringField()
     content = db.StringField()
     date = db.StringField()
+    avatar = db.StringField()
 
     def to_json(self):
         return {
             "post_id": self.post_id,
             "fullName": self.fullName,
             "content": self.content,
-            "date": self.date
+            "date": self.date,
+            "avatar": self.avatar
+        }
+
+class Friends(db.Document):
+    f_id = db.StringField()
+    userA = db.StringField()
+    userB = db.StringField()
+
+    def to_json(self):
+        return {
+            "f_id": self.f_id,
+            "userA": self.userA,
+            "userB": self.userB,
         }
 
 @app.route('/add_user', methods=['POST'])
@@ -74,7 +90,8 @@ def addUser():
             matricule = data['matricule'],
             faculte = data['faculte'],        
             cursus = data['cursus'],       
-            annee = data['annee'] 
+            annee = data['annee'],
+            avatar = data['avatar']
         )
         user.save()
         return make_response("USER CREATED", 200)
@@ -117,7 +134,8 @@ def updateUser(emailLocal):
             'matricule': data['matricule'],
             'faculte': data['faculte'],        
             'cursus': data['cursus'],       
-            'annee': data['annee'] 
+            'annee': data['annee'],
+            'avatar': data['avatar']
         }
         username.update(**fields)
         return make_response("USER UPDATED", 200)
@@ -143,6 +161,7 @@ def addPost():
             fullName = data['fullName'],
             content = data['content'], 
             date = data['date'],
+            avatar = data['avatar']
         )
         post.save()
         return make_response("POST CREATED", 200)
@@ -157,7 +176,42 @@ def getPosts():
     posts_json = json.dumps(posts)
     return posts_json 
 
-    
+@app.route('/all_user', methods=['GET'])
+def getAllUsers():
+    users = []
+    for user in User.objects:
+        users.append(user.to_json())
+    posts_json = json.dumps(users)
+    return posts_json 
+
+@app.route('/add_friends', methods=['POST'])
+def addFriends():
+    data = request.get_json()
+    if data is not None:
+        for ami in Friends.objects:
+            if (ami.userA == data['userA'] and ami.userB == data['userB']) or (ami.userA == data['userB'] and ami.userB == data['userA']):
+                return make_response("ALREADY FRIENDS", 404)
+        amis = Friends(
+            f_id = data['post_id'],
+            userA = data['userA'],
+            userB = data['userB'],
+        )
+        amis.save()
+        return make_response("FRIENDS CREATED", 200)
+    else:
+        return make_response("DATA IS EMPTY", 404)
+
+@app.route('/get_friends/<emailLocal>', methods=['GET'])
+def getFriends(emailLocal):
+    list_ami = []
+    for ami in Friends.objects:
+        if ami.userA == emailLocal:
+            list_ami.append(ami.to_json())
+        elif ami.userB == emailLocal:
+            list_ami.append(ami.to_json())
+    ami_json = json.dumps(list_ami)
+    return ami_json
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,10 +2,10 @@ import { Select, InputLabel, FormControl, MenuItem } from '@material-ui/core'
 
 export function Dropdown({title, name, oc, listdp}){
     const listDropdown = [
-        [ 'Etudiant', 'Formateur'], 
+        [ 'Étudiant', 'Formateur'], 
         [ 'Paris', 'Lille'], 
-        [ 'FullStacks', 'Cybersecurité', 'DevOps', 'Reseaux', 'NewTech' ], 
-        [ 'Premiere', 'Deuxieme', 'Troisieme', 'Quatrieme', 'Cinquieme' ]
+        [ 'FullStack', 'Cybersécurité', 'DevOps', 'Réseaux', 'NewTech' ], 
+        [ 'Première', 'Deuxième', 'Troisième', 'Quatrième', 'Cinquième' ]
       ]
     return (
         <>

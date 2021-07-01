@@ -8,6 +8,7 @@ import { Input } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
 import { Dropdown } from '../../components'
 import { v4 as uuid } from 'uuid'
+import { randomColor } from './../../utils'
 
 export function SignupPage() {
 
@@ -46,7 +47,8 @@ export function SignupPage() {
     matricule: initialValues.matricule,
     faculte: initialValues.faculte,
     cursus: initialValues.cursus,
-    annee: initialValues.annee
+    annee: initialValues.annee,
+    avatar: randomColor(),
   }
 
   const handleSubmit = async (state) => {
