@@ -5,10 +5,14 @@ import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Dropdown } from '../../components'
+import { v4 as uuid } from 'uuid'
+import { randomColor } from './../../utils'
 
 export function SignupPage() {
+
+  const history = useHistory()
 
   const [initialValues, setInitialValues] = useState({
     status: '',
@@ -31,40 +35,35 @@ export function SignupPage() {
     }))
   }
 
-  const listValues = [{
+  const listValues = {
+    user_id: uuid(),
     status: initialValues.status,
     prenom: initialValues.prenom,
     nom: initialValues.nom,
     email: initialValues.email,
     password: initialValues.password,
     birthday: initialValues.birthday,
-    telephone: initialValues.tel,
+    tel: initialValues.tel,
     matricule: initialValues.matricule,
     faculte: initialValues.faculte,
     cursus: initialValues.cursus,
-    annee: initialValues.annee
-  }]
-
-  const redirect_Page = (path, time) => {
-      let tID = setTimeout(function () {
-          window.location.href = path;
-          window.clearTimeout(tID);
-      }, time);
+    annee: initialValues.annee,
+    avatar: randomColor(),
   }
 
   const handleSubmit = async (state) => {
-    console.log(state);
-    /* const request = await fetch("/add_user", {
+    const request = await fetch("/add_user", {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
       },
       body: JSON.stringify(state)
     })
-    if (request.ok){
-      return redirect_Page("/connect", 1000)
-    } */
-
+    if (request.ok) {
+      history.push('/Connexion')
+    } else if (request.statusText === 'NOT FOUND') {
+      alert('Cette adresse email est déjà utilisée')
+    }
   }
 
   return (

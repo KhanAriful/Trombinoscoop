@@ -1,17 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import MetaTags from 'react-meta-tags'
 import BG from './../../assets/images/bg.jpg'
 import { Input } from '@material-ui/core'
-import { Dropdown } from '../../components'
-import { Avatar } from '../../components'
+import { Dropdown, Avatar } from '../../components'
+import { Link, useHistory } from 'react-router-dom'
 
 export function EditProfile() {
 
+  const history = useHistory()
+
   const [initialValues, setInitialValues] = useState({
     status: '',
-    prenom: 'User',
-    nom: 'User',
+    prenom: 'Uploading...',
+    nom: 'Uploading...',
     email: '',
     password: '',
     birthday: '',
@@ -22,6 +24,27 @@ export function EditProfile() {
     annee: '',
   })
 
+  useEffect(() => {
+    const emailLocal = localStorage.getItem('email')
+
+    fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+        setInitialValues({
+            status: data.user.status,
+            prenom: data.user.prenom,
+            nom: data.user.nom,
+            email: data.user.email,
+            password: data.user.password,
+            birthday: data.user.birthday,
+            tel: data.user.tel,
+            matricule: data.user.matricule,
+            faculte: data.user.faculte,
+            cursus: data.user.cursus,
+            annee: data.user.annee,
+            avatar: data.user.avatar,
+        })
+    })
+}, [])
+
   const handleChange = e => {
     setInitialValues(prevValues => ({
       ...prevValues,
@@ -29,55 +52,55 @@ export function EditProfile() {
     }))
   }
 
-  const listValues = [{
-    status: initialValues.status,
-    prenom: initialValues.prenom,
-    nom: initialValues.nom,
-    email: initialValues.email,
-    password: initialValues.password,
-    birthday: initialValues.birthday,
-    telephone: initialValues.tel,
-    matricule: initialValues.matricule,
-    faculte: initialValues.faculte,
-    cursus: initialValues.cursus,
-    annee: initialValues.annee
-  }]
-
-  const handleSubmit = async (state) => {
-    console.log(state);
-    /* const request = await fetch("/add_user", {
+  const handleSubmit = async () => {
+    const emailLocal = localStorage.getItem('email')
+    const request = await fetch(`/update/${emailLocal}`, {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
       },
-      body: JSON.stringify(state)
+      body: JSON.stringify(initialValues)
     })
     if (request.ok){
-      return redirect_Page("/connect", 1000)
-    } */
+      history.push('/User')
+    }
+  }
 
+  const handleDelete = async () => {
+    const emailLocal = localStorage.getItem('email')
+    const request = await fetch(`/delete_user/${emailLocal}`, {
+      method: "POST",
+      headers: {
+          'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify(initialValues)
+    })
+    if (request.ok){
+      localStorage.clear()
+      history.push('/Connexion')
+    }
   }
 
   return (
     <>
       <MetaTags>
-        <title>Modifier le profile</title>
+        <title>Modifier le profil</title>
       </MetaTags>
       <Wrapper>
         <Overlay className="flex justify-center items-center">
           <div className="bg-white w-4/6 flex items-center flex-col rounded-2xl shadow-xl py-8">
             <Avatar initial={initialValues.prenom + initialValues.nom} large={true}/>
-            <h2 className="mb-6">Modifier le profile</h2>
+            <h2 className="mb-6">Modifier le profil</h2>
             <div className="flex items-center mb-8">
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-8" placeholder="Nom" name="nom" value={initialValues.nom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-8" placeholder={initialValues.nom} value={initialValues.nom} name="nom" onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Email" name="email" value={initialValues.email} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Date de naissance" name="birthday" value={initialValues.birthday} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-8" placeholder="Matricule" name="matricule" value={initialValues.matricule} onChange={handleChange}/>
                 <Input className="w-full px-4 mb-10" placeholder="Téléphone mobile" name="tel" value={initialValues.tel} onChange={handleChange}/>
               </div>
               <div className="w-1/2 mx-14">
-                <Input className="w-full px-4 mb-6" placeholder="Prenom" name="prenom" value={initialValues.prenom} onChange={handleChange}/>
+                <Input className="w-full px-4 mb-6" placeholder={initialValues.prenom} value={initialValues.prenom} name="prenom"  onChange={handleChange}/>
                 <Input className="w-full px-4 mb-2" placeholder="Mot de passe" name="password" type="password" value={initialValues.password} onChange={handleChange}/>
                 <Dropdown title='Faculté' name='faculte' oc={handleChange} listdp={1} />
                 <Dropdown title='Cursus' name='cursus' oc={handleChange} listdp={2} />
@@ -85,12 +108,21 @@ export function EditProfile() {
                 <Dropdown title='Je suis:' name='status' oc={handleChange} listdp={0} />
               </div>
             </div>
-            <button 
-              className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
-              onClick={() => handleSubmit(listValues)}
-            >
-                Sauvegarder
-            </button>
+            <div className='flex'>
+              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8" > Retour </button></Link>
+              <button 
+                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
+                onClick={handleDelete}
+              >
+                  Supprimer mon compte
+              </button>
+              <button 
+                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
+                onClick={handleSubmit}
+              >
+                  Sauvegarder
+              </button>
+            </div>
           </div>
         </Overlay>
       </Wrapper>

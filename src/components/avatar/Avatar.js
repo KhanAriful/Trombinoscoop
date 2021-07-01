@@ -1,10 +1,6 @@
 
-export function Avatar({initial, large}) {
-    const randomColor = () => {
-        let color = Math.floor(Math.random()*16777215).toString(16)
-        let finalColor = '#' + color
-        return finalColor
-    }
+export function Avatar({initial, large, color}) {
+
     const getInitial = (name) => {
         const str = name
         var first = str.match(/\b(\w)/g)
@@ -13,12 +9,10 @@ export function Avatar({initial, large}) {
         return final
     }
 
-    const color = randomColor()
-
     return (
         <>
             <div>
-                <span className="avatar avatar-text" style={{background: color, width: large ? 66 : 49, height: large ? 66 : 49, fontSize: large ? 26 : 20}}>{getInitial(initial)}</span>
+                <span className="avatar avatar-text" style={{background: color ? color : 'rgb(69, 154, 170)', width: large ? 66 : 49, height: large ? 66 : 49, fontSize: large ? 26 : 20}}>{getInitial(initial)}</span>
             </div>
         </>
     )

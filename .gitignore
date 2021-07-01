@@ -4,6 +4,9 @@ logs
 **/*.backup.*
 **/*.back.*
 
+/backend/venv
+/backend/__pycache__
+
 node_modules
 bower_components
 

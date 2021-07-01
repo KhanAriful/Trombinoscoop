@@ -61,6 +61,10 @@ h2 {
   color: white;
 }
 
+.primary-button:focus {
+  outline: none;
+}
+
 .secondary-button {
   background-color: var(--secondary-color);
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -69,6 +73,10 @@ h2 {
   font-size: 18px;
   line-height: 27px;
   color: white;
+}
+
+.secondary-button:focus {
+  outline: none;
 }
 
 .primary-button:hover, .secondary-button:hover{
@@ -189,4 +197,12 @@ h2 {
   
   
   color: #474646;  
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.removr-border:focus {
+  outline: none;
 }

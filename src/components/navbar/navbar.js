@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export function Navbar() {
+  const logout = () => {
+    localStorage.clear()
+  }
   return (
     <header style={{zIndex: 999}} className="bg-white shadow-xl fixed w-full">
       <div className="container h-20 mx-auto flex justify-between items-center">
@@ -15,7 +18,7 @@ export function Navbar() {
         </Link>
         <div className="flex flex-row items-center">
           <Link to="/User"><button className="primary-button rounded-xl px-12 py-2">Voir mon profil</button></Link>
-          <Link to="/Connexion"><button className="secondary-button rounded-xl px-12 py-2 ml-3">Deconnexion</button></Link>
+          <Link to="/Connexion"><button className="secondary-button rounded-xl px-12 py-2 ml-3" onClick={logout}>Déconnexion</button></Link>
         </div>
       </div>
     </header>

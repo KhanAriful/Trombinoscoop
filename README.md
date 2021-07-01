@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Install Certif Flask 
+pip install certifi
+/Applications/Python\ 3.6/Install\ Certificates.command
+
+## Install Flask env
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install -r requirements.txt
