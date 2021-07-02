@@ -80,6 +80,13 @@ python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
 
+## Install Flask env windows 
+cd backend
+python -m venv venv
+.\venv\Scripts\activate
+python -m pip install -r requirements.txt
+Flask run
+
 ## Install React Package
 yarn
 
