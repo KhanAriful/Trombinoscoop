@@ -74,8 +74,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 pip install certifi
 /Applications/Python\ 3.6/Install\ Certificates.command
 
-## Install Flask env
+## Install Flask env mac 
 cd backend
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
+
+## Install React Package
+yarn
+
+## launch application
+yarn start-api #Terminal 1
+yarn start #Terminal 2
