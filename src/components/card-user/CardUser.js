@@ -17,7 +17,7 @@ export function CardUser({ name, fonction, color, email, button }) {
             userA: localStorage.getItem('email'),
             userB: email,
         }
-        const request = await fetch(`/add_friends`, {
+        const request = await fetch(`https://trombiapi.herokuapp.com/add_friends`, {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -25,8 +25,7 @@ export function CardUser({ name, fonction, color, email, button }) {
             body: JSON.stringify(body)
           })
           if (request.ok){
-            // fetchPosts()
-            console.log('Added')
+            window.location.reload(false)
           }
     }
 

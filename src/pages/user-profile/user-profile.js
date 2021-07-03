@@ -34,7 +34,7 @@ export function UserProfile() {
             emailLocal = param
         }
 
-        fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+        fetch(`https://trombiapi.herokuapp.com/get_user/${emailLocal}`).then(res => res.json()).then(data => {
             setInitialValues({
                 status: data.user.status,
                 prenom: data.user.prenom,
@@ -59,7 +59,7 @@ export function UserProfile() {
     return (
         <>
             <MetaTags>
-                <title>Mon profil</title>
+                <title>Profil</title>
             </MetaTags>
             <Wrapper>
                 <Navbar />
@@ -85,6 +85,7 @@ export function UserProfile() {
                         Modifier mon profil
                         </button>}
                     </Link>
+                    <Link to='/Posts'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mt-4 mr-2" > Retour </button></Link>
                 </div>
                 </Overlay>
             </Wrapper>

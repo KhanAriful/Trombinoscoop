@@ -4,6 +4,7 @@ import BG from './../../assets/images/concrete-wall-2.png'
 import { Navbar, CardUser, Avatar } from './../../components'
 import { formatDate } from './../../utils'
 import { v4 as uuid } from 'uuid'
+import MetaTags from 'react-meta-tags'
 
 const Post = props => {
   const { name, content, date, color } = props
@@ -40,7 +41,7 @@ export function PostFeed() {
   useEffect(() => {
     const emailLocal = localStorage.getItem('email')
 
-    fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+    fetch(`https://trombiapi.herokuapp.com/get_user/${emailLocal}`).then(res => res.json()).then(data => {
       setInitialValues(prev => ({
         ...prev,
         user_id: data.user.user_id,
@@ -93,7 +94,7 @@ export function PostFeed() {
         ...prev,
         content: '',
       }))
-      const request = await fetch(`/add_post`, {
+      const request = await fetch(`https://trombiapi.herokuapp.com/add_post`, {
         method: "POST",
         headers: {
             'Content-Type' : 'application/json'
@@ -113,20 +114,20 @@ export function PostFeed() {
   } 
 
   const fetchPosts = async () => {
-    await fetch(`/get_post`).then(res => res.json()).then(data => {
+    await fetch(`https://trombiapi.herokuapp.com/get_post`).then(res => res.json()).then(data => {
       setPostes(data.reverse())
     })
   }
 
   const fetchUsers = async () => {
-    await fetch(`/all_user`).then(res => res.json()).then(data => {
+    await fetch(`https://trombiapi.herokuapp.com/all_user`).then(res => res.json()).then(data => {
       setListUsers(data)
     })
   }
 
   const fetchFriends = async () => {
     const emailLocal = localStorage.getItem('email')
-    await fetch(`/get_friends/${emailLocal}`).then(res => res.json()).then(data => {
+    await fetch(`https://trombiapi.herokuapp.com/get_friends/${emailLocal}`).then(res => res.json()).then(data => {
       setListFriends(data)
     })
   }
@@ -142,6 +143,9 @@ export function PostFeed() {
 
   return (
     <>
+      <MetaTags>
+        <title>Trombinoscoop</title>
+      </MetaTags>
       <Wrapper>
         <Navbar />
         <div className="container mx-auto h-content min-h-screen post-feed-bg shadow-xl flex flex-row mt-20">

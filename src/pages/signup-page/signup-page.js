@@ -52,7 +52,7 @@ export function SignupPage() {
   }
 
   const handleSubmit = async (state) => {
-    const request = await fetch("/add_user", {
+    const request = await fetch("https://trombiapi.herokuapp.com/add_user", {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'

@@ -27,7 +27,7 @@ export function EditProfile() {
   useEffect(() => {
     const emailLocal = localStorage.getItem('email')
 
-    fetch(`/get_user/${emailLocal}`).then(res => res.json()).then(data => {
+    fetch(`https://trombiapi.herokuapp.com/get_user/${emailLocal}`).then(res => res.json()).then(data => {
         setInitialValues({
             status: data.user.status,
             prenom: data.user.prenom,
@@ -54,7 +54,7 @@ export function EditProfile() {
 
   const handleSubmit = async () => {
     const emailLocal = localStorage.getItem('email')
-    const request = await fetch(`/update/${emailLocal}`, {
+    const request = await fetch(`https://trombiapi.herokuapp.com/update/${emailLocal}`, {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
@@ -68,7 +68,7 @@ export function EditProfile() {
 
   const handleDelete = async () => {
     const emailLocal = localStorage.getItem('email')
-    const request = await fetch(`/delete_user/${emailLocal}`, {
+    const request = await fetch(`https://trombiapi.herokuapp.com/delete_user/${emailLocal}`, {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
@@ -109,9 +109,9 @@ export function EditProfile() {
               </div>
             </div>
             <div className='flex'>
-              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8" > Retour </button></Link>
+              <Link to='/User'><button className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8 mr-2" > Retour </button></Link>
               <button 
-                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8"
+                className="button-text border-2 border-black rounded-xl px-12 py-1 mb-8 mr-2"
                 onClick={handleDelete}
               >
                   Supprimer mon compte
