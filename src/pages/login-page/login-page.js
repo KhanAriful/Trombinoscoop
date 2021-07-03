@@ -5,8 +5,11 @@ import LogoImg from './../../assets/images/logo.png'
 import { Input } from '@material-ui/core'
 import { Link, useHistory } from 'react-router-dom'
 import { useState } from 'react'
+import Loader from "react-loader-spinner"
 
 export function LoginPage() {
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const history = useHistory()
 
@@ -27,7 +30,8 @@ export function LoginPage() {
   }
 
   const handleSubmit = async () => {
-    const request = await fetch("/login", {
+    setIsLoading(true)
+    const request = await fetch("https://trombiapi.herokuapp.com/login", {
       method: "POST",
       headers: {
           'Content-Type' : 'application/json'
@@ -38,9 +42,11 @@ export function LoginPage() {
       store('isLoggedIn', true)
       store('email', initialValues.email)
       store('avatar', initialValues.avatar)
+      setIsLoading(false)
       history.push('/Posts')
     } else if (request.statusText === 'NOT FOUND') {
       store('isLoggedIn', false)
+      setIsLoading(false)
     }
   }
 
@@ -67,9 +73,30 @@ export function LoginPage() {
           </div>
         </Overlay>
       </Wrapper>
+      {isLoading &&
+      <LoaderBg>
+        <Loader
+          type="Puff"
+          color="#2275A0"
+          height={100}
+          width={100}
+        />
+      </LoaderBg>}
     </>
   )
 }
+
+const LoaderBg = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const Wrapper = styled.main`
   height: 100vh;
