@@ -9,6 +9,9 @@ export default function PublicRoutes() {
         <Route path="/" exact>
           <Redirect to="/Connexion" />
         </Route>
+        <Route path="/Added" exact>
+          <Redirect to="/Posts" />
+        </Route>
         <Route path="User/:email" children={UserProfile} />
         <Route path="/Connexion" component={LoginPage} />
         <Route path="/Inscription" component={SignupPage} />

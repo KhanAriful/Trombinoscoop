@@ -25,7 +25,7 @@ export function CardUser({ name, fonction, color, email, button }) {
             body: JSON.stringify(body)
           })
           if (request.ok){
-            window.location.reload(false)
+            history.push(`/Added`)
           }
     }
 
